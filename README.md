@@ -1,3 +1,5 @@
- # Dragon Boat Race ENG1 Project
+# Dragon Boat Race ENG1 Project
 
- This is the code for the ENG1 project DragonBoatRace Game
+* This is is a fork of [Team 15's Dragon Boat Race game](https://github.com/JoeWrieden/ENG1Project)
+* Visit our website for more details https://team-13-rlc.github.io
+
