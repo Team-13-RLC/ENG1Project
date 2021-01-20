@@ -13,10 +13,12 @@ public enum PowerupType {
     LESSTIME("lesstime.png", boat -> {
     }),
     HEAL("heal.png", boat -> {
+        float healBy = 0.25F;
+            boat.addHealth(boat.getBoatType().getHealth() * healBy);
     });
 
-    String texture;
-    PowerupEffect effect;
+    private final String texture;
+    private final PowerupEffect effect;
 
     PowerupType(String texture, PowerupEffect effect) {
         this.texture = texture;

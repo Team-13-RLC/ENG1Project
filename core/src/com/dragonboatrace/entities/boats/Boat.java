@@ -341,7 +341,7 @@ public class Boat extends Entity {
      * @param change The amount of health to be added.
      */
     public void addHealth(float change) {
-        this.health += change;
+        health = Math.min(change + health, boatType.getHealth());
     }
 
     /**
