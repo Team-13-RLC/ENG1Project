@@ -116,6 +116,11 @@ public class Boat extends Entity {
     protected float penaltyTime;
 
     /**
+     * Controlled by powerups, controls how much damage the boat receives
+     */
+    protected float buff = 1;
+
+    /**
      * Generator for FreeType Font.
      */
     protected FreeTypeFontGenerator generator;
@@ -304,7 +309,7 @@ public class Boat extends Entity {
                 obstacle.dispose();
                 this.lane.removeObstacle(obstacle);
                 size--;
-                this.health -= obstacle.getDamage();
+                this.health -= obstacle.getDamage() * buff;
                 return true;
             }
         }
@@ -326,13 +331,12 @@ public class Boat extends Entity {
     /* Adders */
 
     /**
-     * Increase the velocity of the boat with a push.
+     * Increase the inc of the boat.
      *
-     * @param pushX The x component of the push
-     * @param pushY The y component of the push.
+     * @param inc amount by which to increase speed
      */
-    public void addVelocity(float pushX, float pushY) {
-        this.velocity.add(pushX, pushY);
+    public void addSpeed(float inc) {
+        this.speed += inc;
     }
 
     /**
@@ -341,7 +345,7 @@ public class Boat extends Entity {
      * @param change The amount of health to be added.
      */
     public void addHealth(float change) {
-        this.health += change;
+        health = Math.min(change + health, boatType.getHealth());
     }
 
     /**
@@ -473,6 +477,10 @@ public class Boat extends Entity {
      */
     public float getDistanceTravelled() {
         return this.distanceTravelled;
+    }
+
+    public void setBuff(float buff) {
+        this.buff = buff;
     }
 
     /**
