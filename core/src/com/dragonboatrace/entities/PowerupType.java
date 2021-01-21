@@ -2,13 +2,28 @@ package com.dragonboatrace.entities;
 
 import com.dragonboatrace.entities.boats.Boat;
 import com.dragonboatrace.tools.PowerupEffect;
+import com.dragonboatrace.tools.PowerupTimer;
 
 public enum PowerupType {
     INVULN("invuln.png", boat -> {
+        float invulnFor = 5;
+        new PowerupTimer(invulnFor,  () -> {
+            // be invulnerable
+        });
     }),
     SPEEDUP("speedup.png", boat -> {
+        float speedUpFor = 5;
+        new PowerupTimer(speedUpFor, () -> {
+            // Be faster
+        });
+
     }),
     LESSDAMAGE("lessdamage.png", boat -> {
+        float lessDamageFor = 5;
+        new PowerupTimer(lessDamageFor, () -> {
+            // Take less damage
+        });
+
     }),
     LESSTIME("lesstime.png", boat -> {
         float decreaseTimeBy = -5F; // TODO: move all of these into a separate file
