@@ -13,9 +13,9 @@ public enum PowerupType {
     }),
     SPEEDUP("speedup.png", boat -> {
         float speedUpFor = 5;
-        new PowerupTimer(speedUpFor, () -> {
-            // Be faster
-        });
+        float speedUpBy = 30;
+        boat.addSpeed(speedUpBy);
+        new PowerupTimer(speedUpFor, () -> boat.addSpeed(-speedUpBy));
 
     }),
     LESSDAMAGE("lessdamage.png", boat -> {

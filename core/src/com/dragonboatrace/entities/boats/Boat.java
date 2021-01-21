@@ -326,13 +326,12 @@ public class Boat extends Entity {
     /* Adders */
 
     /**
-     * Increase the velocity of the boat with a push.
+     * Increase the inc of the boat.
      *
-     * @param pushX The x component of the push
-     * @param pushY The y component of the push.
+     * @param inc amount by which to increase speed
      */
-    public void addVelocity(float pushX, float pushY) {
-        this.velocity.add(pushX, pushY);
+    public void addSpeed(float inc) {
+        this.speed += inc;
     }
 
     /**
