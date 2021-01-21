@@ -5,6 +5,10 @@ import com.badlogic.gdx.math.Vector2;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Class of all powerups. Currently inheriting from Entity, but should probably inherit from something else.
+ * Constructs the powerup and stores its type. Updates the position whe update is called.
+ */
 public class Powerup extends Entity{
     PowerupType type;
     Powerup(PowerupType type, float startX, int width){
