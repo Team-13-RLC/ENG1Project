@@ -4,6 +4,8 @@ import com.dragonboatrace.entities.boats.Boat;
 import com.dragonboatrace.tools.PowerupEffect;
 import com.dragonboatrace.tools.PowerupTimer;
 
+import static com.dragonboatrace.tools.PowerupStats.*;
+
 /**
  * Represents a type of powerup. Specifies the effect of each one.
  *
@@ -21,9 +23,8 @@ public enum PowerupType {
      * Invulnerability. Setts the damage multiplier to 0 for a set amount of time, then sets it back to 1.
      */
     INVULN("invuln.png", boat -> {
-        float invulnFor = 5;
         boat.setBuff(0);
-        new PowerupTimer(invulnFor,  () -> {
+        new PowerupTimer(INVULN_FOR,  () -> {
             boat.setBuff(1); // no buff
         });
     }),
@@ -34,10 +35,8 @@ public enum PowerupType {
      * Speed is not just reset to the original number, in case the boat picks up another speed boost.
      */
     SPEEDUP("speedup.png", boat -> {
-        float speedUpFor = 5;
-        float speedUpBy = 30;
-        boat.addSpeed(speedUpBy);
-        new PowerupTimer(speedUpFor, () -> boat.addSpeed(-speedUpBy));
+        boat.addSpeed(SPEEDUP_BY);
+        new PowerupTimer(SPEEDUP_FOR, () -> boat.addSpeed(-SPEEDUP_BY));
     }),
 
     /**
@@ -47,10 +46,8 @@ public enum PowerupType {
      * the multiplier will be reset to 1 when the first one runs out.
      */
     LESSDAMAGE("lessdamage.png", boat -> {
-        float lessDamageFor = 5;
-        float lessDamageBy = 0.5F;
-        boat.setBuff(lessDamageBy);
-        new PowerupTimer(lessDamageFor, () -> {
+        boat.setBuff(LESSDAMAGE_BY);
+        new PowerupTimer(LESSDAMAGE_FOR,  () -> {
             boat.setBuff(1); // no buff
         });
     }),
@@ -59,8 +56,7 @@ public enum PowerupType {
      * Reduce the amount of recorded time for the current round. No timeout.
      */
     LESSTIME("lesstime.png", boat -> {
-        float decreaseTimeBy = 5F; // TODO: move all of these into a separate file
-        boat.setTime(boat.getTime() - decreaseTimeBy);
+        boat.setTime(boat.getTime() - LESSTIME_BY);
     }),
 
     /**
@@ -69,8 +65,7 @@ public enum PowerupType {
      * This is subject to change.
      */
     HEAL("heal.png", boat -> {
-        float healBy = 0.25F;
-        boat.addHealth(boat.getBoatType().getHealth() * healBy);
+        boat.addHealth(boat.getBoatType().getHealth() * HEAL_BY);
     });
 
     /**
