@@ -85,6 +85,7 @@ public class BoatSelectScreen implements Screen {
 
         this.buttonWidth = EntityType.BUTTON.getWidth();
 
+        // Order matters, first button is the one closest to the left
         this.fastButton = ButtonFactory.boatSelect("fast_button");
         this.agileButton = ButtonFactory.boatSelect("agile_button");
         this.strongButton = ButtonFactory.boatSelect("strong_button");
