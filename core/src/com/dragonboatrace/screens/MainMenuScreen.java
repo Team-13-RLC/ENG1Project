@@ -54,10 +54,10 @@ public class MainMenuScreen implements Screen {
      */
     public MainMenuScreen(DragonBoatRace game) {
         this.game = game;
-
-        this.playButton = ButtonFactory.mainMenu("play_button", 400f);
-        this.helpButton = ButtonFactory.mainMenu("help_button", 250f);
-        this.exitButton = ButtonFactory.mainMenu("exit_button", 100f);
+        // Note: Order matters. Buttons have to appear in opposite order
+        this.exitButton = ButtonFactory.mainMenu("exit_button");
+        this.helpButton = ButtonFactory.mainMenu("help_button");
+        this.playButton = ButtonFactory.mainMenu("play_button");
         this.logo = new Texture("dragon.png");
         logoXOffset = 680f / Settings.SCALAR;
         logoYOffset = 600f / Settings.SCALAR;
