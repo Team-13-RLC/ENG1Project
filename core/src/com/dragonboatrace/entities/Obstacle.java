@@ -34,7 +34,6 @@ public class Obstacle extends Entity {
         /* First vector is long as to start it at a random x position within the bounds of the screen */
         /* Form of Entity(Vector2 pos, Vector2 vel, EntityType type, String texture) */
         super(Factory.randPosVec(EntityType.OBSTACLE, laneLeftBound, laneWidth),  new Vector2(), EntityType.OBSTACLE, type.getTexture());
-        //TODO: random position factory?
         this.speed = type.getSpeed();
         this.damage = type.getDamage();
     }
