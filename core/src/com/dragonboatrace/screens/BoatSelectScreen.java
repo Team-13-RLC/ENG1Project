@@ -13,6 +13,7 @@ import com.dragonboatrace.DragonBoatRace;
 import com.dragonboatrace.entities.Button;
 import com.dragonboatrace.entities.EntityType;
 import com.dragonboatrace.entities.boats.BoatType;
+import com.dragonboatrace.tools.ButtonFactory;
 import com.dragonboatrace.tools.Settings;
 
 /**
@@ -84,10 +85,10 @@ public class BoatSelectScreen implements Screen {
 
         this.buttonWidth = EntityType.BUTTON.getWidth();
         float spacing = (Gdx.graphics.getWidth() - buttonWidth * 4.0f) / 5.0f;
-        this.fastButton = new Button(new Vector2(spacing, 100), "fast_button_active.png", "fast_button_inactive.png");
-        this.agileButton = new Button(new Vector2(spacing + (buttonWidth + spacing), 100), "agile_button_active.png", "agile_button_inactive.png");
-        this.strongButton = new Button(new Vector2(spacing + (buttonWidth + spacing) * 2, 100), "strong_button_active.png", "strong_button_inactive.png");
-        this.enduranceButton = new Button(new Vector2(spacing + (buttonWidth + spacing) * 3, 100), "endurance_button_active.png", "endurance_button_inactive.png");
+        this.fastButton = ButtonFactory.boatSelect("fast_button");
+        this.agileButton = ButtonFactory.boatSelect("agile_button");
+        this.strongButton = ButtonFactory.boatSelect("strong_button");
+        this.enduranceButton = ButtonFactory.boatSelect("endurance_button");
 
         this.fastImage = new Texture("fast.png");
         this.agileImage = new Texture("agile.png");
