@@ -84,7 +84,7 @@ public class BoatSelectScreen implements Screen {
         this.game = game;
 
         this.buttonWidth = EntityType.BUTTON.getWidth();
-        float spacing = (Gdx.graphics.getWidth() - buttonWidth * 4.0f) / 5.0f;
+
         this.fastButton = ButtonFactory.boatSelect("fast_button");
         this.agileButton = ButtonFactory.boatSelect("agile_button");
         this.strongButton = ButtonFactory.boatSelect("strong_button");

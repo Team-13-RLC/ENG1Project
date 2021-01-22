@@ -2,6 +2,7 @@ package com.dragonboatrace.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.dragonboatrace.tools.VectorFactory;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -12,7 +13,11 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Powerup extends Entity{
     PowerupType type;
     Powerup(PowerupType type, float startX, int width){
-        super(new Vector2(((int) startX + width) / 2.0f + ThreadLocalRandom.current().nextInt(-((int) startX + width) / 2 + EntityType.OBSTACLE.getWidth() / 2, ((int) startX + width) / 2 + EntityType.POWERUP.getWidth() / 2), Gdx.graphics.getHeight()), new Vector2(), EntityType.POWERUP, type.getTexture());
+        super(VectorFactory.randPosVec(EntityType.POWERUP, startX, width),
+                new Vector2(),
+                EntityType.POWERUP,
+                type.getTexture()
+        );
         this.type = type;
     }
 
