@@ -29,7 +29,7 @@ public class Obstacle extends Entity {
     public Obstacle(ObstacleType type, float laneLeftBound, int laneWidth) {
         /* Entity creation */
         /* Form of Entity(Vector2 pos, Vector2 vel, EntityType type, String texture) */
-        super(VectorFactory.randPosVec(EntityType.OBSTACLE, laneLeftBound, laneWidth),
+        super(VectorFactory.randomPosition(EntityType.OBSTACLE, laneLeftBound, laneWidth),
                 new Vector2(),
                 EntityType.OBSTACLE,
                 type.getTexture());

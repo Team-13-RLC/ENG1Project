@@ -12,8 +12,8 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class Powerup extends Entity{
     PowerupType type;
-    Powerup(PowerupType type, float startX, int width){
-        super(VectorFactory.randPosVec(EntityType.POWERUP, startX, width),
+    Powerup(PowerupType type, float laneLeftBound, int laneWidth){
+        super(VectorFactory.randomPosition(EntityType.POWERUP, laneLeftBound, laneWidth),
                 new Vector2(),
                 EntityType.POWERUP,
                 type.getTexture()
