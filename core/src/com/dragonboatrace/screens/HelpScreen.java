@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector2;
 import com.dragonboatrace.entities.Button;
+import com.dragonboatrace.tools.ButtonFactory;
 import com.dragonboatrace.tools.Settings;
 
 /**
@@ -82,7 +83,7 @@ public class HelpScreen implements Screen {
     public HelpScreen(MainMenuScreen callBack) {
         this.mainMenu = callBack;
         this.helpInfo = new Texture(Gdx.files.local("help_screen_info.png"));
-        this.backButton = new Button(new Vector2(0, 0), "back_button_active.png", "back_button_inactive.png");
+        this.backButton = ButtonFactory.help("back_button");
         this.maxHeight = Gdx.graphics.getHeight() - this.helpInfo.getHeight() / Settings.SCALAR;
 
         this.currPos = maxHeight;

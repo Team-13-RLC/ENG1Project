@@ -7,7 +7,7 @@ import com.dragonboatrace.entities.EntityType;
 
 public class ButtonFactory {
 
-    static int mainMenuButtonCount = 0;
+    private static int mainMenuButtonCount = 0;
     public static Button mainMenu(String texturePrefix){
         float yOffset = 100f;
         float spacing = 10f + EntityType.BUTTON.getHeight();
@@ -21,5 +21,11 @@ public class ButtonFactory {
         );
     }
 
-//    public static Button BoatSelect(float spacing, button, String texturePrefix )
+    public static Button help(String texturePrefix){
+        return new Button(
+                new Vector2(0, 0),
+                texturePrefix + "_active.png",
+                texturePrefix + "_inactive.png"
+        );
+    }
 }
