@@ -108,16 +108,6 @@ public class Lane {
     }
 
     /**
-     * Remove an {@link Obstacle} from the list of obstacles, and randomly replace it.
-     *
-     * @param toRemove The obstacle to remove from the lane.
-     */
-    public void removeObstacle(Obstacle toRemove) {
-        obstacles.remove(toRemove);
-        replaceObstacle();
-    }
-
-    /**
      * Create a random time at which to add an {@link Obstacle} to the lane.
      */
     public void replaceObstacle() {
@@ -130,7 +120,7 @@ public class Lane {
      * @return a new {@link Obstacle} in the lanes area.
      */
     private Obstacle randomObstacle() {
-        int rand = ThreadLocalRandom.current().nextInt(0, ObstacleType.values().length);
+        int rand = ObstacleType.getWeightedRandom();
         return new Obstacle(ObstacleType.values()[rand], this.area.getX(), this.area.getWidth());
     }
 

@@ -47,6 +47,10 @@ public class Settings {
      * Maximum time, in seconds, before the next obstacle can spawn
      */
     public static float OBSTACLE_SPAWN_RATE_MAX = 1f;
+    /**
+     * Chance of an obsticle spawning rather then a powerup
+     */
+    public static double OBSTACLE_SPAWN_CHANCE = 0.5;
 
     /**
      * Set the resolution of the screen.

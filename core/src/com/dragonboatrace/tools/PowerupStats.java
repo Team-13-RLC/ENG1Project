@@ -16,5 +16,10 @@ public class PowerupStats {
     public final static float BRANCH_DAMAGE = 10F;
     public final static float LEAF_DAMAGE = 5F;
 
+    /**
+     * Which Collidable is teh first powerup.
+     */
+    public final static int POWERUPS_START_AT_INDEX = 3;
+
     private PowerupStats(){} //Make sure this is never instantiated
 }
