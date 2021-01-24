@@ -74,23 +74,23 @@ public enum CollidableType {
     });
 
     /**
-     * The texture of the obstacle.
+     * The texture of the collidable.
      */
     private final String texture;
     /**
-     * The base speed at which the obstacle moves.
+     * The base speed at which the collidable moves.
      */
     private final float speed;
     /**
-     * The damage the obstacle type deal at a collision.
+     * The effect the collidable has on the boat at a collision.
      */
     private final CollidableEffect effect;
 
     /**
-     * Creates a new type of obstacle with a given texture, base speed and an effect.
+     * Creates a new type of collidable with a given texture, base speed and an effect.
      *
-     * @param texture The path to the obstacles texture.
-     * @param speed   The speed of the obstacle type.
+     * @param texture The path to the collidables texture.
+     * @param speed   The speed of the collidable type.
      * @param effect  The effect of the Collidable on the boat
      */
     CollidableType(String texture, float speed, CollidableEffect effect) {
@@ -100,9 +100,9 @@ public enum CollidableType {
     }
 
     /**
-     * Get the base speed of the obstacle type.
+     * Get the base speed of the collidable type.
      *
-     * @return A float representing the speed of the obstacle type.
+     * @return A float representing the speed of the collidable type.
      */
     public float getSpeed() {
         return speed;
@@ -113,9 +113,9 @@ public enum CollidableType {
     }
 
     /**
-     * Get the obstacle types texture
+     * Get the collidable types texture
      *
-     * @return A string representing the path to the obstacles texture.
+     * @return A string representing the path to the collidables texture.
      */
     public String getTexture() {
         return this.texture;

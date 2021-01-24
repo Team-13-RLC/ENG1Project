@@ -25,16 +25,16 @@ public class Lane {
      */
     private final Hitbox area;
     /**
-     * A list of the obstacles currently in the lane.
+     * A list of the collidables currently in the lane.
      */
     private final ArrayList<Collidable> collidables;
     /**
-     * A list of times to wait before adding a new obstacle to the lane.
+     * A list of times to wait before adding a new collidable to the lane.
      */
     private final ArrayList<Float> randomWaitTimes;
 
     /**
-     * Creates a new lane at a position and with a width and uses the round number to change the number of obstacles.
+     * Creates a new lane at a position and with a width and uses the round number to change the number of collidables.
      * @param pos The position of the lane in the screen.
      * @param width The width of the lane.
      * @param round The current round, used to increase difficulty.
@@ -47,7 +47,7 @@ public class Lane {
     }
 
     /**
-     * Update the obstacles in the lane, remove any that are no longer on screen and replace them at a random time.
+     * Update the collidables in the lane, remove any that are no longer on screen and replace them at a random time.
      *
      * @param deltaTime The time since the last frame.
      * @param velY      The y-velocity of the boat in the lane.
@@ -65,7 +65,7 @@ public class Lane {
             }
         }
 
-        /* Randomly replace obstacles */
+        /* Randomly replace collidables */
         ListIterator<Float> times = randomWaitTimes.listIterator();
         while (times.hasNext()) {
             float time = times.next() - deltaTime;
@@ -79,7 +79,7 @@ public class Lane {
     }
 
     /**
-     * Render the obstacles in the lane.
+     * Render the collidables in the lane.
      *
      * @param batch The SpriteBatch to be added to.
      */
@@ -90,9 +90,9 @@ public class Lane {
     }
 
     /**
-     * Get the list of all obstacles in the lane.
+     * Get the list of all collidables in the lane.
      *
-     * @return An {@link ArrayList} of type {@link Collidable} with all the obstacles in the lane.
+     * @return An {@link ArrayList} of type {@link Collidable} with all the collidables in the lane.
      */
     public ArrayList<Collidable> getCollidables() {
         return this.collidables;
@@ -125,8 +125,8 @@ public class Lane {
     }
 
     /**
-     * Fill the list with obstacles that will start at random times.
-     * @param round The current round increases the number of obstacles.
+     * Fill the list with collidables that will start at random times.
+     * @param round The current round increases the number of collidables.
      */
     private void populateList(int round) {
         for (int i = 0; i < (11 - Settings.PLAYER_COUNT + round - 1); i++) {

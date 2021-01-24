@@ -6,29 +6,29 @@ import com.dragonboatrace.tools.CollidableEffect;
 import com.dragonboatrace.tools.VectorFactory;
 
 /**
- * Represents an Obstacle.
+ * Represents a Collidable.
  *
  * @author Benji Garment, Joe Wrieden
  */
 public class Collidable extends Entity {
 
     /**
-     * The speed of the obstacle.
+     * The speed of the collidable.
      */
     private final float speed;
     /**
-     * The damage the obstacle will deal when colliding with a player.
+     * Effect the collidable will have on the boat upon collision (positive or negative)
      */
     private final CollidableEffect effect;
 
     private final CollidableType type;
 
     /**
-     * Creates a new Obstacle of a specific type and bounds in which it can be created.
+     * Creates a new Collidable of a specific type and bounds in which it can be created.
      *
-     * @param type   The type of obstacle.
-     * @param laneLeftBound The starting x value the obstacle can be created in.
-     * @param laneWidth  How far from startX the obstacle can be created.
+     * @param type          The type of collidable.
+     * @param laneLeftBound The starting x value the collidable can be created in.
+     * @param laneWidth     How far from startX the collidable can be created.
      */
     public Collidable(CollidableType type, float laneLeftBound, int laneWidth) {
         /* Entity creation */
@@ -45,10 +45,10 @@ public class Collidable extends Entity {
     }
 
     /**
-     * Update the obstacle's position relative to the time passed since last frame and the velocity of the boat in that lane.
+     * Update the collidable's position relative to the time passed since last frame and the velocity of the boat in that lane.
      *
      * @param deltaTime The time since last frame.
-     * @param velY      The y-velocity of the boat in the same lane as the obstacle.
+     * @param velY      The y-velocity of the boat in the same lane as the collidable.
      */
     public void update(float deltaTime, float velY) {
         this.position.add(0, -1 * (velY + this.speed) * deltaTime);
@@ -56,9 +56,9 @@ public class Collidable extends Entity {
     }
 
     /**
-     * Get the obstacles speed attribute, not the velocity it is moving at currently.
+     * Get the collidables speed attribute, not the velocity it is moving at currently.
      *
-     * @return A float of the obstacles speed attribute.
+     * @return A float of the collidables speed attribute.
      */
     public float getSpeed() {
         return this.speed;
@@ -74,8 +74,8 @@ public class Collidable extends Entity {
     /**
      * Is the object a powerup or an obstacle
      */
-    public boolean isPowerup(){
-        switch (type){
+    public boolean isPowerup() {
+        switch (type) {
             case INVULN:
             case SPEEDUP:
             case LESSDAMAGE:
@@ -86,10 +86,11 @@ public class Collidable extends Entity {
                 return false;
         }
     }
+
     /**
-     * The position of the obstacle.
+     * The position of the collidable.
      *
-     * @return A Vector2 of the position of the obstacle.
+     * @return A Vector2 of the position of the collidable.
      */
     public Vector2 getPos() {
         return this.position;
