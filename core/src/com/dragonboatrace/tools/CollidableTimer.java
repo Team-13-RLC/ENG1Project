@@ -6,7 +6,7 @@ import java.util.TimerTask;
 /**
  * Asynchronous timer used for powerups which meed to be timed out.
  */
-public class PowerupTimer {
+public class CollidableTimer {
     /**
      * The actual timer object.
      */
@@ -18,7 +18,7 @@ public class PowerupTimer {
      * @param effect function interface which is ran whe the timer expires.
      *               (in the form of a java Runnable)
      */
-    public PowerupTimer(float seconds, Runnable effect) {
+    public CollidableTimer(float seconds, Runnable effect) {
         timer = new Timer();
         timer.schedule(new RunTask(effect), (long)(seconds* 1000L));
     }

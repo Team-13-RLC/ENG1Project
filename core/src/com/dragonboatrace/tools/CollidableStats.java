@@ -1,6 +1,6 @@
 package com.dragonboatrace.tools;
 
-public class PowerupStats {
+public class CollidableStats {
     //TODO: final could get removed later, if these are used with the difficulty.
     public final static float INVULN_FOR = 5.F;
     public final static float SPEEDUP_FOR = 5.F;
@@ -21,5 +21,5 @@ public class PowerupStats {
      */
     public final static int POWERUPS_START_AT_INDEX = 3;
 
-    private PowerupStats(){} //Make sure this is never instantiated
+    private CollidableStats(){} //Make sure this is never instantiated
 }

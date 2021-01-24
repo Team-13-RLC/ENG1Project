@@ -1,12 +1,12 @@
 package com.dragonboatrace.entities;
 
-import com.dragonboatrace.tools.PowerupEffect;
-import com.dragonboatrace.tools.PowerupTimer;
+import com.dragonboatrace.tools.CollidableEffect;
+import com.dragonboatrace.tools.CollidableTimer;
 import com.dragonboatrace.tools.Settings;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import static com.dragonboatrace.tools.PowerupStats.*;
+import static com.dragonboatrace.tools.CollidableStats.*;
 
 /**
  * Represents a type of collidable (obstacle or powerup)
@@ -29,7 +29,7 @@ public enum ObstacleType {
      */
     INVULN("invuln.png", 0, boat -> {
         boat.setBuff(0);
-        new PowerupTimer(INVULN_FOR, () -> {
+        new CollidableTimer(INVULN_FOR, () -> {
             boat.setBuff(1); // no buff
         });
     }),
@@ -41,7 +41,7 @@ public enum ObstacleType {
      */
     SPEEDUP("speedup.png", 0, boat -> {
         boat.addSpeed(SPEEDUP_BY);
-        new PowerupTimer(SPEEDUP_FOR, () -> boat.addSpeed(-SPEEDUP_BY));
+        new CollidableTimer(SPEEDUP_FOR, () -> boat.addSpeed(-SPEEDUP_BY));
     }),
 
     /**
@@ -52,7 +52,7 @@ public enum ObstacleType {
      */
     LESSDAMAGE("lessdamage.png", 0, boat -> {
         boat.setBuff(LESSDAMAGE_BY);
-        new PowerupTimer(LESSDAMAGE_FOR, () -> {
+        new CollidableTimer(LESSDAMAGE_FOR, () -> {
             boat.setBuff(1); // no buff
         });
     }),
@@ -84,7 +84,7 @@ public enum ObstacleType {
     /**
      * The damage the obstacle type deal at a collision.
      */
-    private final PowerupEffect effect;
+    private final CollidableEffect effect;
 
     /**
      * Creates a new type of obstacle with a given texture, base speed and an effect.
@@ -93,7 +93,7 @@ public enum ObstacleType {
      * @param speed   The speed of the obstacle type.
      * @param effect  The effect of the Collidable on the boat
      */
-    ObstacleType(String texture, float speed, PowerupEffect effect) {
+    ObstacleType(String texture, float speed, CollidableEffect effect) {
         this.texture = texture;
         this.speed = speed;
         this.effect = effect;
@@ -108,7 +108,7 @@ public enum ObstacleType {
         return speed;
     }
 
-    public PowerupEffect getEffect() {
+    public CollidableEffect getEffect() {
         return effect;
     }
 

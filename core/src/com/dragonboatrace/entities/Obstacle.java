@@ -2,7 +2,7 @@ package com.dragonboatrace.entities;
 
 import com.badlogic.gdx.math.Vector2;
 import com.dragonboatrace.entities.boats.Boat;
-import com.dragonboatrace.tools.PowerupEffect;
+import com.dragonboatrace.tools.CollidableEffect;
 import com.dragonboatrace.tools.VectorFactory;
 
 /**
@@ -19,7 +19,7 @@ public class Obstacle extends Entity {
     /**
      * The damage the obstacle will deal when colliding with a player.
      */
-    private final PowerupEffect effect;
+    private final CollidableEffect effect;
 
     private final ObstacleType type;
 
