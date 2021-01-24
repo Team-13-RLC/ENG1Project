@@ -21,12 +21,14 @@ public class Obstacle extends Entity {
      */
     private final PowerupEffect effect;
 
+    private final ObstacleType type;
+
     /**
      * Creates a new Obstacle of a specific type and bounds in which it can be created.
      *
      * @param type   The type of obstacle.
-     * @param startX The starting x value the obstacle can be created in.
-     * @param width  How far from startX the obstacle can be created.
+     * @param laneLeftBound The starting x value the obstacle can be created in.
+     * @param laneWidth  How far from startX the obstacle can be created.
      */
     public Obstacle(ObstacleType type, float laneLeftBound, int laneWidth) {
         /* Entity creation */
@@ -38,6 +40,7 @@ public class Obstacle extends Entity {
 
         this.speed = type.getSpeed();
         this.effect = type.getEffect();
+        this.type = type;
 
     }
 
@@ -68,6 +71,21 @@ public class Obstacle extends Entity {
         effect.invoke(boat);
     }
 
+    /**
+     * Is the object a powerup or an obstacle
+     */
+    public boolean isPowerup(){
+        switch (type){
+            case INVULN:
+            case SPEEDUP:
+            case LESSDAMAGE:
+            case LESSTIME:
+            case HEAL:
+                return false;
+            default:
+                return true;
+        }
+    }
     /**
      * The position of the obstacle.
      *

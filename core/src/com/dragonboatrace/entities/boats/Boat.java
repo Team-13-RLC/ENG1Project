@@ -303,14 +303,15 @@ public class Boat extends Entity {
      * @return True if a collision occurred, False if no collision.
      */
     protected boolean checkCollisions() {
-        return lane.getObstacles().removeIf(obstacle -> {
+        for (Obstacle obstacle :lane.getObstacles()) {
             if (obstacle.getHitBox().collidesWith(this.hitbox)) {
                 obstacle.dispose();
+                lane.getObstacles().remove(obstacle);
                 obstacle.takeEffect(this);
                 return true;
             }
+        }
         return false;
-        });
     }
 
     /**
