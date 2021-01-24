@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.concurrent.ThreadLocalRandom;
 
+import static com.dragonboatrace.tools.Settings.OBSTACLE_SPAWN_RATE_MAX;
+import static com.dragonboatrace.tools.Settings.OBSTACLE_SPAWN_RATE_MIN;
+
 /**
  * Represents a Lane in a {@link Race}.
  *
@@ -118,7 +121,7 @@ public class Lane {
      * Create a random time at which to add an {@link Obstacle} to the lane.
      */
     public void replaceObstacle() {
-        randomWaitTimes.add(1.0f + 2 * ThreadLocalRandom.current().nextFloat());
+        randomWaitTimes.add(OBSTACLE_SPAWN_RATE_MIN + OBSTACLE_SPAWN_RATE_MAX * ThreadLocalRandom.current().nextFloat());
     }
 
     /**

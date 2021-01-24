@@ -28,7 +28,7 @@ public class Settings {
      */
     public static int PLAYER_COUNT = 8;
     /**
-     * Reduces the scalar that stamina gives when accelerating, see {@link com.dragonboatrace.entities.boats.Boat#velocityPercentage()}
+     * Reduces the scalar that stamina gives when accelerating
      */
     public static int STAMINA_SPEED_DIVISION = 2;
     /**
@@ -39,6 +39,14 @@ public class Settings {
      * The the boat must wait before moving again after a collision.
      */
     public static float OBSTACLE_COLLISION_TIME = 0.5f;
+    /**
+     * Minimum time, in seconds, before the next obstacle can spawn
+     */
+    public static float OBSTACLE_SPAWN_RATE_MIN = 0.5f;
+    /**
+     * Maximum time, in seconds, before the next obstacle can spawn
+     */
+    public static float OBSTACLE_SPAWN_RATE_MAX = 1f;
 
     /**
      * Set the resolution of the screen.
