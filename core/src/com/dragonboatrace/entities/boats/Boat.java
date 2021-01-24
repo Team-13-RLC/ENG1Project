@@ -303,13 +303,10 @@ public class Boat extends Entity {
      */
     protected boolean checkCollisions() {
         ArrayList<Obstacle> obstacles = this.lane.getObstacles();
-        int size = obstacles.size();
-        for (int i = 0; i < size; i++) {
-            Obstacle obstacle = obstacles.get(i);
+        for (Obstacle obstacle :obstacles) {
             if (obstacle.getHitBox().collidesWith(this.hitbox)) {
                 obstacle.dispose();
-                this.lane.removeObstacle(obstacle);
-                size--;
+                obstacles.remove(obstacle);
                 this.health -= obstacle.getDamage() * buff;
                 return true;
             }
