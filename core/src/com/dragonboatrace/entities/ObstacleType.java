@@ -2,6 +2,9 @@ package com.dragonboatrace.entities;
 
 import com.dragonboatrace.tools.PowerupEffect;
 import com.dragonboatrace.tools.PowerupTimer;
+import com.dragonboatrace.tools.Settings;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 import static com.dragonboatrace.tools.PowerupStats.*;
 
@@ -116,5 +119,15 @@ public enum ObstacleType {
      */
     public String getTexture() {
         return this.texture;
+    }
+
+    public static int getWeightedRandom(){
+        double p = Math.random();
+        if (p < Settings.OBSTACLE_SPAWN_CHANCE){
+            return ThreadLocalRandom.current().nextInt(0, POWERUPS_START_AT_INDEX);
+        }
+        return ThreadLocalRandom.current().nextInt(POWERUPS_START_AT_INDEX, ObstacleType.values().length);
+
+
     }
 }
