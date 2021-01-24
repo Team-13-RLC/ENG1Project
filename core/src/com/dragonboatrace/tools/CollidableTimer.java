@@ -4,7 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Asynchronous timer used for powerups which meed to be timed out.
+ * Asynchronous timer used for powerups which need to be timed out.
  */
 public class CollidableTimer {
     /**

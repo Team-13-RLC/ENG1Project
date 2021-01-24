@@ -162,7 +162,6 @@ public class ComputerBoat extends Boat {
 
     /**
      * Check for obstacles in the area, specified by moveArea, to move away from.
-     * If collidable is a powerup, ignore it.
      *
      * @return The closest Obstacle in the area or null if no obstacles are in the area.
      */
