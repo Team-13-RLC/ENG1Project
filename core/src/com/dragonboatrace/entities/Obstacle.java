@@ -1,6 +1,8 @@
 package com.dragonboatrace.entities;
 
 import com.badlogic.gdx.math.Vector2;
+import com.dragonboatrace.entities.boats.Boat;
+import com.dragonboatrace.tools.PowerupEffect;
 import com.dragonboatrace.tools.VectorFactory;
 
 /**
@@ -17,7 +19,7 @@ public class Obstacle extends Entity {
     /**
      * The damage the obstacle will deal when colliding with a player.
      */
-    private final float damage;
+    private final PowerupEffect effect;
 
     /**
      * Creates a new Obstacle of a specific type and bounds in which it can be created.
@@ -35,7 +37,8 @@ public class Obstacle extends Entity {
                 type.getTexture());
 
         this.speed = type.getSpeed();
-        this.damage = type.getDamage();
+        this.effect = type.getEffect();
+
     }
 
     /**
@@ -59,12 +62,10 @@ public class Obstacle extends Entity {
     }
 
     /**
-     * Get the amount of damage the obstacle will deal at a collision.
-     *
-     * @return A float of the amount of damage.
+     * Invoke the effect of the collidable on the boat.
      */
-    public float getDamage() {
-        return this.damage;
+    public void takeEffect(Boat boat) {
+        effect.invoke(boat);
     }
 
     /**

@@ -306,7 +306,7 @@ public class Boat extends Entity {
         return lane.getObstacles().removeIf(obstacle -> {
             if (obstacle.getHitBox().collidesWith(this.hitbox)) {
                 obstacle.dispose();
-                this.health -= obstacle.getDamage() * buff;
+                obstacle.takeEffect(this);
                 return true;
             }
         return false;
@@ -478,6 +478,10 @@ public class Boat extends Entity {
 
     public void setBuff(float buff) {
         this.buff = buff;
+    }
+
+    public float getBuff() {
+        return buff;
     }
 
     /**

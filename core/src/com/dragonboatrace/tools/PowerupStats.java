@@ -11,5 +11,10 @@ public class PowerupStats {
     public final static float LESSTIME_BY = 0.5F;
     public final static float HEAL_BY = 0.25F;
 
+
+    public final static float ROCK_DAMAGE = 20F;
+    public final static float BRANCH_DAMAGE = 10F;
+    public final static float LEAF_DAMAGE = 5F;
+
     private PowerupStats(){} //Make sure this is never instantiated
 }

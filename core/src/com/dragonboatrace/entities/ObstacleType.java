@@ -1,15 +1,25 @@
 package com.dragonboatrace.entities;
 
+import com.dragonboatrace.tools.PowerupEffect;
+
+import static com.dragonboatrace.tools.PowerupStats.*;
+
 /**
- * Represents a type of obstacle.
+ * Represents a type of collidable (obstacle or powerup)
  *
  * @author Benji Garment, Joe Wrieden
  */
 public enum ObstacleType {
-    /* ENUM(texture, speed, damage)*/
-    ROCK("rock.png", 50, 20),
-    BRANCH("branch.png", 60, 10),
-    LEAF("leaf.png", 75, 5);
+    /* ENUM(texture, speed, effect)*/
+    ROCK("rock.png", 50, boat -> {
+        boat.addHealth(-ROCK_DAMAGE * boat.getBuff());
+    }),
+    BRANCH("branch.png", 60, boat -> {
+        boat.addHealth(-BRANCH_DAMAGE * boat.getBuff());
+    }),
+    LEAF("leaf.png", 75, boat -> {
+        boat.addHealth(-LEAF_DAMAGE * boat.getBuff());
+    });
 
     /**
      * The texture of the obstacle.
@@ -22,19 +32,19 @@ public enum ObstacleType {
     /**
      * The damage the obstacle type deal at a collision.
      */
-    private final float damage;
+    private final PowerupEffect effect;
 
     /**
-     * Creates a new type of obstacle with a given texture, base speed ana damage value.
+     * Creates a new type of obstacle with a given texture, base speed and an effect.
      *
      * @param texture The path to the obstacles texture.
      * @param speed   The speed of the obstacle type.
-     * @param damage  The damage of the obstacle type.
+     * @param effect  The effect of the Collidable on the boat
      */
-    ObstacleType(String texture, float speed, float damage) {
+    ObstacleType(String texture, float speed, PowerupEffect effect) {
         this.texture = texture;
         this.speed = speed;
-        this.damage = damage;
+        this.effect = effect;
     }
 
     /**
@@ -43,16 +53,11 @@ public enum ObstacleType {
      * @return A float representing the speed of the obstacle type.
      */
     public float getSpeed() {
-        return this.speed;
+        return speed;
     }
 
-    /**
-     * Get the damage of the obstacle type.
-     *
-     * @return A float representing the damage dealt by the obstacle type.
-     */
-    public float getDamage() {
-        return this.damage;
+    public PowerupEffect getEffect(){
+        return effect;
     }
 
     /**
