@@ -13,7 +13,7 @@ import static com.dragonboatrace.tools.CollidableStats.*;
  *
  * @author Benji Garment, Joe Wrieden
  */
-public enum ObstacleType {
+public enum CollidableType {
     /* ENUM(texture, speed, effect)*/
     ROCK("rock.png", 50, boat -> {
         boat.addHealth(-ROCK_DAMAGE * boat.getBuff());
@@ -93,7 +93,7 @@ public enum ObstacleType {
      * @param speed   The speed of the obstacle type.
      * @param effect  The effect of the Collidable on the boat
      */
-    ObstacleType(String texture, float speed, CollidableEffect effect) {
+    CollidableType(String texture, float speed, CollidableEffect effect) {
         this.texture = texture;
         this.speed = speed;
         this.effect = effect;
@@ -126,7 +126,7 @@ public enum ObstacleType {
         if (p < Settings.OBSTACLE_SPAWN_CHANCE){
             return ThreadLocalRandom.current().nextInt(0, POWERUPS_START_AT_INDEX);
         }
-        return ThreadLocalRandom.current().nextInt(POWERUPS_START_AT_INDEX, ObstacleType.values().length);
+        return ThreadLocalRandom.current().nextInt(POWERUPS_START_AT_INDEX, CollidableType.values().length);
 
 
     }

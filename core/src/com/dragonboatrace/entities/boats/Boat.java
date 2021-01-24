@@ -7,15 +7,13 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector2;
+import com.dragonboatrace.entities.Collidable;
 import com.dragonboatrace.entities.Entity;
 import com.dragonboatrace.entities.EntityType;
-import com.dragonboatrace.entities.Obstacle;
 import com.dragonboatrace.tools.Hitbox;
 import com.dragonboatrace.tools.Lane;
 import com.dragonboatrace.tools.Settings;
 import com.dragonboatrace.tools.VectorFactory;
-
-import java.util.ArrayList;
 
 /**
  * Represents a generic Boat.
@@ -303,13 +301,13 @@ public class Boat extends Entity {
      * @return True if a collision occurred, False if no collision.
      */
     protected boolean checkCollisions() {
-        for (Obstacle obstacle :lane.getObstacles()) {
-            if (obstacle.getHitBox().collidesWith(this.hitbox)) {
-                obstacle.dispose();
-                lane.getObstacles().remove(obstacle);
-                lane.replaceObstacle();
-                obstacle.takeEffect(this);
-                return obstacle.isPowerup();
+        for (Collidable collidable :lane.getCollidables()) {
+            if (collidable.getHitBox().collidesWith(this.hitbox)) {
+                collidable.dispose();
+                lane.getCollidables().remove(collidable);
+                lane.replaceCollidable();
+                collidable.takeEffect(this);
+                return !collidable.isPowerup();
             }
         }
         return false;

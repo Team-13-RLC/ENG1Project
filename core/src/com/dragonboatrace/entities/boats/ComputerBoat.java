@@ -3,7 +3,7 @@ package com.dragonboatrace.entities.boats;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.dragonboatrace.entities.Obstacle;
+import com.dragonboatrace.entities.Collidable;
 import com.dragonboatrace.tools.Hitbox;
 import com.dragonboatrace.tools.Lane;
 import com.dragonboatrace.tools.Settings;
@@ -76,7 +76,7 @@ public class ComputerBoat extends Boat {
     public void update(float deltaTime) {
         if (!recentCollision) {
             /*Check for nearby obstacles */
-            Obstacle closest = checkObstacles();
+            Collidable closest = checkCollidables();
             /* Check obstacles will return null if no obstacles nearby */
             if (closest != null) {
                 this.velocity.set(this.speed * moveFromObject(closest), this.speed);
@@ -162,18 +162,19 @@ public class ComputerBoat extends Boat {
 
     /**
      * Check for obstacles in the area, specified by moveArea, to move away from.
+     * If collidable is a powerup, ignore it.
      *
      * @return The closest Obstacle in the area or null if no obstacles are in the area.
      */
-    private Obstacle checkObstacles() {
-        ArrayList<Obstacle> obstacles = this.lane.getObstacles();
-        Obstacle closest = null;
+    private Collidable checkCollidables() {
+        ArrayList<Collidable> collidables = this.lane.getCollidables();
+        Collidable closest = null;
         float smallest = Gdx.graphics.getHeight();
-        for (Obstacle obstacle : obstacles) {
-            if (obstacle.getHitBox().collidesWith(this.moveArea)) {
-                float bottomY = obstacle.getPos().y;
+        for (Collidable collidable : collidables) {
+            if (collidable.getHitBox().collidesWith(this.moveArea)) {
+                float bottomY = collidable.getPos().y;
                 if (bottomY < smallest) {
-                    closest = obstacle;
+                    closest = collidable;
                     smallest = bottomY;
                 }
             }
@@ -191,7 +192,7 @@ public class ComputerBoat extends Boat {
      * <li>0 if the boat should move neither way.</li>
      * </ul>
      */
-    private int moveFromObject(Obstacle closest) {
+    private int moveFromObject(Collidable closest) {
         float obstacleLeft = closest.getPos().x;
         float boatLeft = this.position.x;
 

@@ -10,7 +10,7 @@ import com.dragonboatrace.tools.VectorFactory;
  *
  * @author Benji Garment, Joe Wrieden
  */
-public class Obstacle extends Entity {
+public class Collidable extends Entity {
 
     /**
      * The speed of the obstacle.
@@ -21,7 +21,7 @@ public class Obstacle extends Entity {
      */
     private final CollidableEffect effect;
 
-    private final ObstacleType type;
+    private final CollidableType type;
 
     /**
      * Creates a new Obstacle of a specific type and bounds in which it can be created.
@@ -30,7 +30,7 @@ public class Obstacle extends Entity {
      * @param laneLeftBound The starting x value the obstacle can be created in.
      * @param laneWidth  How far from startX the obstacle can be created.
      */
-    public Obstacle(ObstacleType type, float laneLeftBound, int laneWidth) {
+    public Collidable(CollidableType type, float laneLeftBound, int laneWidth) {
         /* Entity creation */
         /* Form of Entity(Vector2 pos, Vector2 vel, EntityType type, String texture) */
         super(VectorFactory.randomPosition(EntityType.OBSTACLE, laneLeftBound, laneWidth),
@@ -81,9 +81,9 @@ public class Obstacle extends Entity {
             case LESSDAMAGE:
             case LESSTIME:
             case HEAL:
-                return false;
-            default:
                 return true;
+            default:
+                return false;
         }
     }
     /**

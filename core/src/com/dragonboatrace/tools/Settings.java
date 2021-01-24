@@ -18,7 +18,7 @@ public class Settings {
     /**
      * If the game is fullscreen or not.
      */
-    public static boolean FULLSCREEN = true;
+    public static boolean FULLSCREEN = false;
     /**
      * The global scalar at which to scale entities.
      */
@@ -42,11 +42,11 @@ public class Settings {
     /**
      * Minimum time, in seconds, before the next obstacle can spawn
      */
-    public static float OBSTACLE_SPAWN_RATE_MIN = 0.5f;
+    public static float COLLIDABLE_SPAWN_RATE_MIN = 0.5f;
     /**
      * Maximum time, in seconds, before the next obstacle can spawn
      */
-    public static float OBSTACLE_SPAWN_RATE_MAX = 1f;
+    public static float COLLIDABLE_SPAWN_RATE_MAX = 1f;
     /**
      * Chance of an obsticle spawning rather then a powerup
      */

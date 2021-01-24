@@ -3,15 +3,15 @@ package com.dragonboatrace.tools;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.dragonboatrace.entities.Obstacle;
-import com.dragonboatrace.entities.ObstacleType;
+import com.dragonboatrace.entities.Collidable;
+import com.dragonboatrace.entities.CollidableType;
 
 import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static com.dragonboatrace.tools.Settings.OBSTACLE_SPAWN_RATE_MAX;
-import static com.dragonboatrace.tools.Settings.OBSTACLE_SPAWN_RATE_MIN;
+import static com.dragonboatrace.tools.Settings.COLLIDABLE_SPAWN_RATE_MAX;
+import static com.dragonboatrace.tools.Settings.COLLIDABLE_SPAWN_RATE_MIN;
 
 /**
  * Represents a Lane in a {@link Race}.
@@ -27,7 +27,7 @@ public class Lane {
     /**
      * A list of the obstacles currently in the lane.
      */
-    private final ArrayList<Obstacle> obstacles;
+    private final ArrayList<Collidable> collidables;
     /**
      * A list of times to wait before adding a new obstacle to the lane.
      */
@@ -41,7 +41,7 @@ public class Lane {
      */
     public Lane(Vector2 pos, int width, int round) {
         this.area = new Hitbox(pos.x, pos.y, width, Gdx.graphics.getHeight() + 200);
-        this.obstacles = new ArrayList<>();
+        this.collidables = new ArrayList<>();
         this.randomWaitTimes = new ArrayList<>();
         populateList(round);
     }
@@ -55,13 +55,13 @@ public class Lane {
     public void update(float deltaTime, float velY) {
 
         /* Check for collisions */
-        ListIterator<Obstacle> iter = obstacles.listIterator();
+        ListIterator<Collidable> iter = collidables.listIterator();
         while (iter.hasNext()) {
-            Obstacle obstacle = iter.next();
-            obstacle.update(deltaTime, velY);
-            if (obstacle.getHitBox().leaves(this.area)) {
+            Collidable collidable = iter.next();
+            collidable.update(deltaTime, velY);
+            if (collidable.getHitBox().leaves(this.area)) {
                 iter.remove();
-                replaceObstacle();
+                replaceCollidable();
             }
         }
 
@@ -72,7 +72,7 @@ public class Lane {
             if (time > 0) {
                 times.set(time);
             } else {
-                obstacles.add(randomObstacle());
+                collidables.add(randomCollidable());
                 times.remove();
             }
         }
@@ -84,18 +84,18 @@ public class Lane {
      * @param batch The SpriteBatch to be added to.
      */
     public void render(SpriteBatch batch) {
-        for (Obstacle obstacle : obstacles) {
-            obstacle.render(batch);
+        for (Collidable collidable : collidables) {
+            collidable.render(batch);
         }
     }
 
     /**
      * Get the list of all obstacles in the lane.
      *
-     * @return An {@link ArrayList} of type {@link Obstacle} with all the obstacles in the lane.
+     * @return An {@link ArrayList} of type {@link Collidable} with all the obstacles in the lane.
      */
-    public ArrayList<Obstacle> getObstacles() {
-        return this.obstacles;
+    public ArrayList<Collidable> getCollidables() {
+        return this.collidables;
     }
 
     /**
@@ -108,20 +108,20 @@ public class Lane {
     }
 
     /**
-     * Create a random time at which to add an {@link Obstacle} to the lane.
+     * Create a random time at which to add an {@link Collidable} to the lane.
      */
-    public void replaceObstacle() {
-        randomWaitTimes.add(OBSTACLE_SPAWN_RATE_MIN + OBSTACLE_SPAWN_RATE_MAX * ThreadLocalRandom.current().nextFloat());
+    public void replaceCollidable() {
+        randomWaitTimes.add(COLLIDABLE_SPAWN_RATE_MIN + COLLIDABLE_SPAWN_RATE_MAX * ThreadLocalRandom.current().nextFloat());
     }
 
     /**
-     * Create a new random {@link Obstacle}
+     * Create a new random {@link Collidable}
      *
-     * @return a new {@link Obstacle} in the lanes area.
+     * @return a new {@link Collidable} in the lanes area.
      */
-    private Obstacle randomObstacle() {
-        int rand = ObstacleType.getWeightedRandom();
-        return new Obstacle(ObstacleType.values()[rand], this.area.getX(), this.area.getWidth());
+    private Collidable randomCollidable() {
+        int rand = CollidableType.getWeightedRandom();
+        return new Collidable(CollidableType.values()[rand], this.area.getX(), this.area.getWidth());
     }
 
     /**
@@ -130,12 +130,12 @@ public class Lane {
      */
     private void populateList(int round) {
         for (int i = 0; i < (11 - Settings.PLAYER_COUNT + round - 1); i++) {
-            replaceObstacle();
+            replaceCollidable();
         }
     }
 
     public void dispose() {
-        for (Obstacle obst : obstacles) {
+        for (Collidable obst : collidables) {
             obst.dispose();
         }
     }
