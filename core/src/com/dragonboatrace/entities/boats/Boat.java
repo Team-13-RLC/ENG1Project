@@ -307,8 +307,9 @@ public class Boat extends Entity {
             if (obstacle.getHitBox().collidesWith(this.hitbox)) {
                 obstacle.dispose();
                 lane.getObstacles().remove(obstacle);
+                lane.replaceObstacle();
                 obstacle.takeEffect(this);
-                return true;
+                return obstacle.isPowerup();
             }
         }
         return false;
