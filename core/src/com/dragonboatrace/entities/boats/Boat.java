@@ -297,7 +297,8 @@ public class Boat extends Entity {
     }
 
     /**
-     * Check for collisions by getting the contents of the lane and checking their positions to the boat position.
+     * Check for collisions by comparing positions of collidables in the lane to the boat position.
+     * Then removing those that have been collided with and applying their effects to the boat.
      *
      * @return True if a collision occurred, False if no collision.
      */
