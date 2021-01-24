@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.dragonboatrace.DragonBoatRace;
 import com.dragonboatrace.entities.Button;
 import com.dragonboatrace.entities.EntityType;
+import com.dragonboatrace.tools.ButtonFactory;
 import com.dragonboatrace.tools.Settings;
 
 /**
@@ -53,10 +54,10 @@ public class MainMenuScreen implements Screen {
      */
     public MainMenuScreen(DragonBoatRace game) {
         this.game = game;
-
-        this.exitButton = new Button(new Vector2((Gdx.graphics.getWidth() - EntityType.BUTTON.getWidth()) / 2.0f, 100f / Settings.SCALAR), "exit_button_active.png", "exit_button_inactive.png");
-        this.playButton = new Button(new Vector2((Gdx.graphics.getWidth() - EntityType.BUTTON.getWidth()) / 2.0f, 400f / Settings.SCALAR), "play_button_active.png", "play_button_inactive.png");
-        this.helpButton = new Button(new Vector2((Gdx.graphics.getWidth() - EntityType.BUTTON.getWidth()) / 2.0f, 250f / Settings.SCALAR), "help_button_active.png", "help_button_inactive.png");
+        // Note: Order matters. Buttons have to appear in opposite order
+        this.exitButton = ButtonFactory.mainMenu("exit_button");
+        this.helpButton = ButtonFactory.mainMenu("help_button");
+        this.playButton = ButtonFactory.mainMenu("play_button");
         this.logo = new Texture("dragon.png");
         logoXOffset = 680f / Settings.SCALAR;
         logoYOffset = 600f / Settings.SCALAR;

@@ -13,6 +13,7 @@ import com.dragonboatrace.entities.Obstacle;
 import com.dragonboatrace.tools.Hitbox;
 import com.dragonboatrace.tools.Lane;
 import com.dragonboatrace.tools.Settings;
+import com.dragonboatrace.tools.VectorFactory;
 
 import java.util.ArrayList;
 
@@ -155,7 +156,7 @@ public class Boat extends Entity {
      */
     public Boat(BoatType boat, Lane lane, String name) {
         /* Get boat position from the position of the lane. */
-        super(new Vector2(lane.getHitbox().getX() + (lane.getHitbox().getWidth() - EntityType.BOAT.getWidth()) / 2.0f, 100), new Vector2(), EntityType.BOAT, boat.getImageSrc());
+        super(VectorFactory.boatPosition(lane.getHitbox().getX(), lane.getHitbox().getWidth()), new Vector2(), EntityType.BOAT, boat.getImageSrc());
         this.health = boat.getHealth();
         this.stamina = boat.getStamina();
         this.agility = boat.getAgility();
