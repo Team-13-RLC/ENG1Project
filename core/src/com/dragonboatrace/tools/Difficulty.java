@@ -4,7 +4,8 @@ public enum Difficulty {
     /* ENUM(setter)*/
     EASY(() -> setVars(0.2f, 0.5f, 0, 5, 10, 10)),
     MEDIUM(() -> setVars(0.5f, 1, 0.5f, 2.5f, 5, 5)),
-    HARD(() -> setVars(0.8f, 2, 1, 0, 2.5f, 2.5f));
+    HARD(() -> setVars(0.8f, 2, 1, 0, 2.5f, 2.5f)),
+    VERYHARD(() -> setVars(1, 100, 0, 0, 0, 0));
 
     private final Runnable setter;
 
