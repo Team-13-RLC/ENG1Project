@@ -7,15 +7,13 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector2;
+import com.dragonboatrace.entities.Collidable;
 import com.dragonboatrace.entities.Entity;
 import com.dragonboatrace.entities.EntityType;
-import com.dragonboatrace.entities.Obstacle;
 import com.dragonboatrace.tools.Hitbox;
 import com.dragonboatrace.tools.Lane;
 import com.dragonboatrace.tools.Settings;
 import com.dragonboatrace.tools.VectorFactory;
-
-import java.util.ArrayList;
 
 /**
  * Represents a generic Boat.
@@ -297,21 +295,19 @@ public class Boat extends Entity {
     }
 
     /**
-     * Check for collisions by getting the contents of the lane and checking their positions to the boat position.
+     * Check for collisions by comparing positions of collidables in the lane to the boat position.
+     * Then removing those that have been collided with and applying their effects to the boat.
      *
      * @return True if a collision occurred, False if no collision.
      */
     protected boolean checkCollisions() {
-        ArrayList<Obstacle> obstacles = this.lane.getObstacles();
-        int size = obstacles.size();
-        for (int i = 0; i < size; i++) {
-            Obstacle obstacle = obstacles.get(i);
-            if (obstacle.getHitBox().collidesWith(this.hitbox)) {
-                obstacle.dispose();
-                this.lane.removeObstacle(obstacle);
-                size--;
-                this.health -= obstacle.getDamage() * buff;
-                return true;
+        for (Collidable collidable :lane.getCollidables()) {
+            if (collidable.getHitBox().collidesWith(this.hitbox)) {
+                collidable.dispose();
+                lane.getCollidables().remove(collidable);
+                lane.replaceCollidable();
+                collidable.takeEffect(this);
+                return !collidable.isPowerup();
             }
         }
         return false;
@@ -482,6 +478,10 @@ public class Boat extends Entity {
 
     public void setBuff(float buff) {
         this.buff = buff;
+    }
+
+    public float getBuff() {
+        return buff;
     }
 
     /**
