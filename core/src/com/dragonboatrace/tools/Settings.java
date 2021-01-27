@@ -124,22 +124,4 @@ public class Settings {
         OBSTACLE_COLLISION_TIME = obstacleCollisionTime;
     }
 
-    // Difficulty settings
-    public static final byte EASY = 0;
-    public static final byte MEDIUM = 1;
-    public static final byte HARD = 2;
-
-    public static void setDifficulty(byte difficulty){
-        switch (difficulty){
-            case EASY:
-                //Easy
-                break;
-            case MEDIUM:
-                //Medium
-                break;
-            case HARD:
-                //hard
-                break;
-        }
-    }
 }
