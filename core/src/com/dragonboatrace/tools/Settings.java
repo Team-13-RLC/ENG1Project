@@ -11,46 +11,61 @@ public class Settings {
      * The width of the window.
      */
     public static int WIDTH = 1920;
+
     /**
      * The height of the window.
      */
     public static int HEIGHT = 1080;
+
     /**
      * If the game is fullscreen or not.
      */
     public static boolean FULLSCREEN = false;
+
     /**
      * The global scalar at which to scale entities.
      */
     public static int SCALAR = 1;
+
     /**
      * The number of boats in the game, including the player itself.
      */
     public static int PLAYER_COUNT = 8;
+
     /**
      * Reduces the scalar that stamina gives when accelerating
      */
     public static int STAMINA_SPEED_DIVISION = 2;
-    /**
-     * The velocity penalty given when a collision occurs
-     */
-    public static int OBSTACLE_COLLISION_PENALTY = -20;
-    /**
-     * The the boat must wait before moving again after a collision.
-     */
-    public static float OBSTACLE_COLLISION_TIME = 0.5f;
+
     /**
      * Minimum time, in seconds, before the next collidable can spawn
      */
     public static float COLLIDABLE_SPAWN_RATE_MIN = 0.5f;
+
     /**
      * Maximum time, in seconds, before the next collidable can spawn
      */
     public static float COLLIDABLE_SPAWN_RATE_MAX = 1f;
+
     /**
      * Chance of an obsticle spawning rather then a powerup
      */
     public static double OBSTACLE_SPAWN_CHANCE = 0.5;
+
+    /**
+     * The velocity penalty given when a collision occurs
+     */
+    public static int OBSTACLE_COLLISION_PENALTY = -20;
+
+    /**
+     * The the boat must wait before moving again after a collision.
+     */
+    public static float OBSTACLE_COLLISION_TIME = 0.5f;
+
+    /**
+     * This number multiplied by the obstacle's damage gives the total amount of damage an obstacle deals.
+     */
+    public static float OBSTACLE_DAMAGE_MULTIPLIER = 1.0f;
 
     /**
      * Set the resolution of the screen.
@@ -107,5 +122,24 @@ public class Settings {
      */
     public static void setObstacleCollisionTime(float obstacleCollisionTime) {
         OBSTACLE_COLLISION_TIME = obstacleCollisionTime;
+    }
+
+    // Difficulty settings
+    public static final byte EASY = 0;
+    public static final byte MEDIUM = 1;
+    public static final byte HARD = 2;
+
+    public static void setDifficulty(byte difficulty){
+        switch (difficulty){
+            case EASY:
+                //Easy
+                break;
+            case MEDIUM:
+                //Medium
+                break;
+            case HARD:
+                //hard
+                break;
+        }
     }
 }
