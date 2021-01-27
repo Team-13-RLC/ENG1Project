@@ -66,7 +66,7 @@ public class ButtonFactory {
      * @param texturePrefix The first part of the name of the texture.
      * @return the instance of Button.
      */
-    public static Button boatSelect(String texturePrefix) {
+    public static Button select(String texturePrefix) {
         float xOffset = (Gdx.graphics.getWidth() - EntityType.BUTTON.getWidth() * 4.0f) / 5.0f;
         float spacing = (EntityType.BUTTON.getWidth() + xOffset);
         return new Button(
