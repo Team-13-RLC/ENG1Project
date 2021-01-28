@@ -78,13 +78,13 @@ project(":Tests") {
         compile project(":core")
 
         compile "junit:junit:5.+"
-        compile "org.mockito:mockito-all:3.+"
+//        compile "org.mockito:mockito-all:3.7.7"
 
         compile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
 
         testCompile 'junit:junit:5.+'
-        testCompile "org.mockito:mockito-all:3.+"
+//        testCompile "org.mockito:mockito-all:3.7.7"
 
         testCompile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
         testCompile "com.badlogicgames.gdx:gdx:$gdxVersion"
