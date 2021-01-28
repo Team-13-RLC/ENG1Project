@@ -16,13 +16,13 @@ import static com.dragonboatrace.tools.CollidableStats.*;
 public enum CollidableType {
     /* ENUM(texture, speed, effect)*/
     ROCK("rock.png", 50, boat -> {
-        boat.addHealth(-ROCK_DAMAGE * boat.getBuff());
+        boat.addHealth(-ROCK_DAMAGE * boat.getBuff() * Settings.OBSTACLE_DAMAGE_MULTIPLIER);
     }),
     BRANCH("branch.png", 60, boat -> {
-        boat.addHealth(-BRANCH_DAMAGE * boat.getBuff());
+        boat.addHealth(-BRANCH_DAMAGE * boat.getBuff() * Settings.OBSTACLE_DAMAGE_MULTIPLIER);
     }),
     LEAF("leaf.png", 75, boat -> {
-        boat.addHealth(-LEAF_DAMAGE * boat.getBuff());
+        boat.addHealth(-LEAF_DAMAGE * boat.getBuff() * Settings.OBSTACLE_DAMAGE_MULTIPLIER);
     }),
     /**
      * Invulnerability. Setts the damage multiplier to 0 for a set amount of time, then sets it back to 1.

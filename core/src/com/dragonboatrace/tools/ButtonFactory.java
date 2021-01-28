@@ -33,7 +33,7 @@ public class ButtonFactory {
         return new Button(
                 new Vector2(
                         (Gdx.graphics.getWidth() - EntityType.BUTTON.getWidth()) / 2.0f,
-                        (yOffset + spacing * mainMenuButtonCount++) / Settings.SCALAR
+                        (yOffset + spacing * ((mainMenuButtonCount++)%3)) / Settings.SCALAR
                 ),
                 texturePrefix + "_active.png",
                 texturePrefix + "_inactive.png"
@@ -66,11 +66,11 @@ public class ButtonFactory {
      * @param texturePrefix The first part of the name of the texture.
      * @return the instance of Button.
      */
-    public static Button boatSelect(String texturePrefix) {
+    public static Button select(String texturePrefix) {
         float xOffset = (Gdx.graphics.getWidth() - EntityType.BUTTON.getWidth() * 4.0f) / 5.0f;
         float spacing = (EntityType.BUTTON.getWidth() + xOffset);
         return new Button(
-                new Vector2(xOffset + spacing * boatSelectionButtonCount++, 100),
+                new Vector2(xOffset + spacing * ((boatSelectionButtonCount++)%4), 100),
                 texturePrefix + "_active.png",
                 texturePrefix + "_inactive.png"
         );

@@ -13,26 +13,22 @@ import com.dragonboatrace.entities.Button;
 import com.dragonboatrace.entities.EntityType;
 import com.dragonboatrace.entities.boats.BoatType;
 import com.dragonboatrace.tools.ButtonFactory;
+import com.dragonboatrace.tools.Difficulty;
 import com.dragonboatrace.tools.Settings;
 
-/**
- * Displays the screen that allows the player to choose a boat at the beginning of the game.
- *
- * @author Benji Garment, Joe Wrieden
- */
-public class BoatSelectScreen implements Screen {
+public class DifficultySelectScreen implements Screen {
     /**
      * Array storing all texture names (they will later be combined with .png and _button)
      */
     private final String[] textureNames = {
-            "fast",
-            "agile",
-            "strong",
-            "endurance"
+            "easy",
+            "medium",
+            "hard",
+            "very_hard"
     };
 
     /**
-     * Array storing all boat textures
+     * Array storing all icon textures
      */
     private final Texture[] iconTextures = new Texture[4];
 
@@ -40,7 +36,6 @@ public class BoatSelectScreen implements Screen {
      * Array storing all buttons (each button keeps track of its own texture)
      */
     private final Button[] buttons = new Button[4];
-
 
     /**
      * Instance of the main game, used to have a collective spritebatch which gives better performance.
@@ -50,27 +45,26 @@ public class BoatSelectScreen implements Screen {
 
     private final BitmapFont font;
     private final GlyphLayout layout;
-    private final String title = "Choose your Boat:";
+    private final String title = "Choose your Difficulty:";
 
-    private final int buttonWidth;
+    private final int buttonWidth = EntityType.BUTTON.getWidth();
+
+    private final BoatType boatType;
 
     /**
-     * Creates a new screen to display the boat options to the player.
+     * Creates a new screen to display the difficulty options to the player.
      *
      * @param game The instance of the {@link DragonBoatRace} game.
      */
-    public BoatSelectScreen(DragonBoatRace game) {
-
+    public DifficultySelectScreen(DragonBoatRace game, BoatType boatType) {
         this.game = game;
+        this.boatType = boatType;
 
         for (int i = 0; i < buttons.length; i++) {
             buttons[i] = ButtonFactory.select(textureNames[i] + "_button");
             iconTextures[i] = new Texture(textureNames[i] + ".png");
         }
 
-        this.buttonWidth = EntityType.BUTTON.getWidth();
-
-        /* Font related items */
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("osaka-re.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size *= 10.0 / Settings.SCALAR;
@@ -78,7 +72,6 @@ public class BoatSelectScreen implements Screen {
         font = generator.generateFont(parameter);
         layout = new GlyphLayout();
         layout.setText(font, title);
-
     }
 
 
@@ -88,17 +81,17 @@ public class BoatSelectScreen implements Screen {
     }
 
     /**
-     * Renders the boat selection screen.
+     * Renders the difficulty selection screen.
      *
      * @param delta The time passed since the last frame.
      */
+    @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        this.game.getBatch().begin();
+        game.getBatch().begin();
 
         font.draw(game.getBatch(), title, (Gdx.graphics.getWidth() - layout.width) / 2, Gdx.graphics.getHeight() - 100);
-
         float scale = ((float) buttonWidth / EntityType.BOAT.getWidth()) / 2.0f;
 
         for (int i = 0; i < buttons.length; i++) {
@@ -114,11 +107,12 @@ public class BoatSelectScreen implements Screen {
 
         for (int i = 0; i < buttons.length; i++) {
             if (buttons[i].isHovering() && Gdx.input.isTouched()) {
-                this.game.setScreen(new DifficultySelectScreen(this.game, BoatType.values()[i]));
+                Difficulty.values()[i].set();
+                this.game.setScreen(new MainGameScreen(this.game, boatType));
             }
         }
 
-        this.game.getBatch().end();
+        game.getBatch().end();
 
     }
 
@@ -144,5 +138,6 @@ public class BoatSelectScreen implements Screen {
 
     @Override
     public void dispose() {
+
     }
 }
