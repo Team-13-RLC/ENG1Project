@@ -21,6 +21,9 @@ import com.dragonboatrace.tools.Settings;
  * @author Benji Garment, Joe Wrieden
  */
 public class BoatSelectScreen implements Screen {
+    /**
+     * Array storing all texture names (they will later be combined with .png and _button)
+     */
     private final String[] textureNames = {
             "fast",
             "agile",
@@ -28,8 +31,14 @@ public class BoatSelectScreen implements Screen {
             "endurance"
     };
 
+    /**
+     * Array storing all boat textures
+     */
     private final Texture[] iconTextures = new Texture[4];
 
+    /**
+     * Array storing all buttons (each button keeps track of its own texture)
+     */
     private final Button[] buttons = new Button[4];
 
 

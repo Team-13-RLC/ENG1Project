@@ -17,20 +17,29 @@ import com.dragonboatrace.tools.Difficulty;
 import com.dragonboatrace.tools.Settings;
 
 public class DifficultySelectScreen implements Screen {
+    /**
+     * Array storing all texture names (they will later be combined with .png and _button)
+     */
     private final String[] textureNames = {
             "easy",
-            "easy",
-            "easy",
-            "easy",
-//            "medium",
-//            "hard",
-//            "very_hard"
+            "medium",
+            "hard",
+            "very_hard"
     };
 
+    /**
+     * Array storing all icon textures
+     */
     private final Texture[] iconTextures = new Texture[4];
 
+    /**
+     * Array storing all buttons (each button keeps track of its own texture)
+     */
     private final Button[] buttons = new Button[4];
 
+    /**
+     * Instance of the main game, used to have a collective spritebatch which gives better performance.
+     */
     private final DragonBoatRace game;
 
 
@@ -42,6 +51,11 @@ public class DifficultySelectScreen implements Screen {
 
     private final BoatType boatType;
 
+    /**
+     * Creates a new screen to display the difficulty options to the player.
+     *
+     * @param game The instance of the {@link DragonBoatRace} game.
+     */
     public DifficultySelectScreen(DragonBoatRace game, BoatType boatType) {
         this.game = game;
         this.boatType = boatType;
@@ -66,6 +80,11 @@ public class DifficultySelectScreen implements Screen {
 
     }
 
+    /**
+     * Renders the difficulty selection screen.
+     *
+     * @param delta The time passed since the last frame.
+     */
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 1, 1);
