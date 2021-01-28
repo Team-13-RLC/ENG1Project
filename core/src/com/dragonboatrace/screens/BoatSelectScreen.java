@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.math.Vector2;
 import com.dragonboatrace.DragonBoatRace;
 import com.dragonboatrace.entities.Button;
 import com.dragonboatrace.entities.EntityType;
@@ -22,46 +21,17 @@ import com.dragonboatrace.tools.Settings;
  * @author Benji Garment, Joe Wrieden
  */
 public class BoatSelectScreen implements Screen {
+    private final String[] textureNames = {
+            "fast",
+            "agile",
+            "strong",
+            "endurance"
+    };
 
-    /**
-     * Texture of the fast boat preview.
-     */
-    private final Texture fastImage;
+    private final Texture[] iconTextures = new Texture[4];
 
-    /**
-     * Texture of the agile boat preview.
-     */
-    private final Texture agileImage;
+    private final Button[] buttons = new Button[4];
 
-    /**
-     * Texture of the strong boat preview.
-     */
-    private final Texture strongImage;
-
-    /**
-     * Texture of the endurance boat preview.
-     */
-    private final Texture enduranceImage;
-
-    /**
-     * Button to select the fast boat.
-     */
-    private final Button fastButton;
-
-    /**
-     * Button to select the agile boat.
-     */
-    private final Button agileButton;
-
-    /**
-     * Button to select the strong boat.
-     */
-    private final Button strongButton;
-
-    /**
-     * Button to select the endurance boat.
-     */
-    private final Button enduranceButton;
 
     /**
      * Instance of the main game, used to have a collective spritebatch which gives better performance.
@@ -71,6 +41,7 @@ public class BoatSelectScreen implements Screen {
 
     private final BitmapFont font;
     private final GlyphLayout layout;
+    private final String title = "Choose your Boat:";
 
     private final int buttonWidth;
 
@@ -83,21 +54,12 @@ public class BoatSelectScreen implements Screen {
 
         this.game = game;
 
+        for (int i = 0; i < buttons.length; i++) {
+            buttons[i] = ButtonFactory.select(textureNames[i] + "_button");
+            iconTextures[i] = new Texture(textureNames[i] + ".png");
+        }
+
         this.buttonWidth = EntityType.BUTTON.getWidth();
-
-        // Order matters, first button is the one closest to the left
-        this.fastButton = ButtonFactory.select("fast_button");
-        this.agileButton = ButtonFactory.select("agile_button");
-        this.strongButton = ButtonFactory.select("strong_button");
-        this.enduranceButton = ButtonFactory.select("endurance_button");
-
-        this.fastImage = new Texture("fast.png");
-        this.agileImage = new Texture("agile.png");
-        this.strongImage = new Texture("strong.png");
-        this.enduranceImage = new Texture("endurance.png");
-
-
-
 
         /* Font related items */
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("osaka-re.ttf"));
@@ -106,7 +68,7 @@ public class BoatSelectScreen implements Screen {
         parameter.color = Color.WHITE;
         font = generator.generateFont(parameter);
         layout = new GlyphLayout();
-        layout.setText(font, "Choose your Boat:");
+        layout.setText(font, title);
 
     }
 
@@ -126,32 +88,26 @@ public class BoatSelectScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         this.game.getBatch().begin();
 
-        font.draw(this.game.getBatch(), "Choose your Boat:", (Gdx.graphics.getWidth() - layout.width) / 2, Gdx.graphics.getHeight() - 100);
+        font.draw(game.getBatch(), title, (Gdx.graphics.getWidth() - layout.width) / 2, Gdx.graphics.getHeight() - 100);
 
-        float scale = ((float) this.buttonWidth / EntityType.BOAT.getWidth()) / 2.0f;
+        float scale = ((float) buttonWidth / EntityType.BOAT.getWidth()) / 2.0f;
 
-        this.game.getBatch().draw(this.fastImage, this.fastButton.getHitBox().getX() + ((this.fastButton.getHitBox().getWidth() - this.buttonWidth / 2f) / 2f), 150 + EntityType.BUTTON.getHeight(), this.buttonWidth / 2f, EntityType.BOAT.getHeight() * scale);
-        this.fastButton.render(this.game.getBatch());
-
-        this.game.getBatch().draw(this.agileImage, this.agileButton.getHitBox().getX() + ((this.agileButton.getHitBox().getWidth() - this.buttonWidth / 2f) / 2f), 150 + EntityType.BUTTON.getHeight(), this.buttonWidth / 2f, EntityType.BOAT.getHeight() * scale);
-        this.agileButton.render(this.game.getBatch());
-
-        this.game.getBatch().draw(this.strongImage, this.strongButton.getHitBox().getX() + ((this.strongButton.getHitBox().getWidth() - this.buttonWidth / 2f) / 2f), 150 + EntityType.BUTTON.getHeight(), this.buttonWidth / 2f, EntityType.BOAT.getHeight() * scale);
-        this.strongButton.render(this.game.getBatch());
-
-        this.game.getBatch().draw(this.enduranceImage, this.enduranceButton.getHitBox().getX() + ((this.enduranceButton.getHitBox().getWidth() - this.buttonWidth / 2f) / 2f), 150 + EntityType.BUTTON.getHeight(), this.buttonWidth / 2f, EntityType.BOAT.getHeight() * scale);
-        this.enduranceButton.render(this.game.getBatch());
-
-        if (this.fastButton.isHovering() && Gdx.input.isTouched()) {
-            this.game.setScreen(new DifficultySelectScreen(this.game, BoatType.FAST));
-        } else if (this.agileButton.isHovering() && Gdx.input.isTouched()) {
-            this.game.setScreen(new DifficultySelectScreen(this.game, BoatType.AGILE));
-        } else if (this.strongButton.isHovering() && Gdx.input.isTouched()) {
-            this.game.setScreen(new DifficultySelectScreen(this.game, BoatType.STRONG));
-        } else if (this.enduranceButton.isHovering() && Gdx.input.isTouched()) {
-            this.game.setScreen(new DifficultySelectScreen(this.game, BoatType.ENDURANCE));
+        for (int i = 0; i < buttons.length; i++) {
+            game.getBatch().draw(
+                    iconTextures[i],
+                    buttons[i].getHitBox().getX() + ((buttons[i].getHitBox().getWidth() - buttonWidth / 2f) / 2f),
+                    150 + EntityType.BUTTON.getHeight(),
+                    buttonWidth / 2f,
+                    EntityType.BOAT.getHeight() * scale
+            );
+            buttons[i].render(game.getBatch());
         }
 
+        for (int i = 0; i < buttons.length; i++) {
+            if (buttons[i].isHovering() && Gdx.input.isTouched()) {
+                this.game.setScreen(new DifficultySelectScreen(this.game, BoatType.values()[i]));
+            }
+        }
 
         this.game.getBatch().end();
 
