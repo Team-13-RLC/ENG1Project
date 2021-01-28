@@ -17,28 +17,23 @@ import com.dragonboatrace.tools.Difficulty;
 import com.dragonboatrace.tools.Settings;
 
 public class DifficultySelectScreen implements Screen {
-    private final Texture[] iconTextures = new Texture[4];
-    private final String[] iconTexturenames = {
-            "easy.png",
-            "medium.png",
-            "hard.png",
-            "very_hard.png"
+    private final String[] textureNames = {
+            "easy",
+            "medium",
+            "hard",
+            "very_hard"
     };
 
+    private final Texture[] iconTextures = new Texture[4];
+
     private final Button[] buttons = new Button[4];
-    private final String[] buttonTexturenames = {
-            "easy_button",
-            "medium_button",
-            "hard_button",
-            "very_hard_button"
-    };
 
     private final DragonBoatRace game;
 
 
     private final BitmapFont font;
     private final GlyphLayout layout;
-    private final String text = "Choose your Difficulty:";
+    private final String title = "Choose your Difficulty:";
 
     private final int buttonWidth = EntityType.BUTTON.getWidth();
 
@@ -49,8 +44,8 @@ public class DifficultySelectScreen implements Screen {
         this.boatType = boatType;
 
         for (int i = 0; i < buttons.length; i++) {
-            buttons[i] = ButtonFactory.select(buttonTexturenames[i]);
-            iconTextures[i] = new Texture(iconTexturenames[i]);
+            buttons[i] = ButtonFactory.select(textureNames[i] + "_button");
+            iconTextures[i] = new Texture(textureNames[i] + ".png");
         }
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("osaka-re.ttf"));
@@ -59,7 +54,7 @@ public class DifficultySelectScreen implements Screen {
         parameter.color = Color.WHITE;
         font = generator.generateFont(parameter);
         layout = new GlyphLayout();
-        layout.setText(font, text);
+        layout.setText(font, title);
     }
 
 
@@ -74,7 +69,7 @@ public class DifficultySelectScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.getBatch().begin();
 
-        font.draw(game.getBatch(), text, (Gdx.graphics.getWidth() - layout.width) / 2, Gdx.graphics.getHeight() - 100);
+        font.draw(game.getBatch(), title, (Gdx.graphics.getWidth() - layout.width) / 2, Gdx.graphics.getHeight() - 100);
         float scale = ((float) buttonWidth / EntityType.BOAT.getWidth()) / 2.0f;
 
         for (int i = 0; i < buttons.length; i++) {
