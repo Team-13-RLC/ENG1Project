@@ -43,11 +43,12 @@ public class DifficultySelectScreen implements Screen {
     private final int buttonWidth = EntityType.BUTTON.getWidth();
 
     private final BoatType boatType;
-    public DifficultySelectScreen(DragonBoatRace game, BoatType boatType){
+
+    public DifficultySelectScreen(DragonBoatRace game, BoatType boatType) {
         this.game = game;
         this.boatType = boatType;
 
-        for (int i = 0 ; i < buttons.length; i++) {
+        for (int i = 0; i < buttons.length; i++) {
             buttons[i] = ButtonFactory.select(buttonTexturenames[i]);
             iconTextures[i] = new Texture(iconTexturenames[i]);
         }
@@ -69,14 +70,14 @@ public class DifficultySelectScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0,0,1,1);
+        Gdx.gl.glClearColor(0, 0, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.getBatch().begin();
 
-        font.draw(game.getBatch(), text, (Gdx.graphics.getWidth() - layout.width)/2, Gdx.graphics.getHeight() - 100);
-        float scale = ((float)buttonWidth/EntityType.BOAT.getWidth()) / 2.0f;
+        font.draw(game.getBatch(), text, (Gdx.graphics.getWidth() - layout.width) / 2, Gdx.graphics.getHeight() - 100);
+        float scale = ((float) buttonWidth / EntityType.BOAT.getWidth()) / 2.0f;
 
-        for (int i = 0 ; i < buttons.length; i++) {
+        for (int i = 0; i < buttons.length; i++) {
             game.getBatch().draw(
                     iconTextures[i],
                     buttons[i].getHitBox().getX() + ((buttons[i].getHitBox().getWidth() - buttonWidth / 2f) / 2f),
@@ -87,7 +88,7 @@ public class DifficultySelectScreen implements Screen {
             buttons[i].render(game.getBatch());
         }
 
-        for (int i = 0 ; i < buttons.length; i++) {
+        for (int i = 0; i < buttons.length; i++) {
             if (buttons[i].isHovering() && Gdx.input.isTouched()) {
                 Difficulty.values()[i].set();
                 this.game.setScreen(new MainGameScreen(this.game, boatType));
