@@ -53,7 +53,7 @@ public class MainGameScreen implements Screen {
     /**
      * Pause game, starts true.
      */
-    private boolean paused = true;
+    private byte gameState = State.COUNTDOWN;
     /**
      * The time left on the initial countdown.
      */
@@ -90,7 +90,7 @@ public class MainGameScreen implements Screen {
         Timer.Task countDownTask = new Timer.Task() {
             @Override
             public void run() {
-                paused = true;
+                gameState = State.COUNTDOWN;
                 if (countDownRemaining == 3) {
                     countDownString = "READY";
                     countDownRemaining--;
@@ -102,7 +102,7 @@ public class MainGameScreen implements Screen {
                     countDownRemaining--;
                 } else {
                     countDownString = "";
-                    paused = false;
+                    gameState = State.RUNNING;
                     this.cancel();
                 }
             }
@@ -129,16 +129,22 @@ public class MainGameScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         this.game.getBatch().begin();
-        if (!paused) {
-            this.logger.log();
-            this.background.update(deltaTime * this.race.getPlayer().getVelocity().y);
-            this.background.render(game.getBatch());
-            this.race.update(deltaTime, this.game);
-            this.race.render(game.getBatch());
-        } else {
-            this.background.render(game.getBatch());
-            this.race.render(game.getBatch());
-            displayCountDown();
+        switch (gameState){
+            case State.RUNNING:
+                this.logger.log();
+                this.background.update(deltaTime * this.race.getPlayer().getVelocity().y);
+                this.background.render(game.getBatch());
+                this.race.update(deltaTime, this.game);
+                this.race.render(game.getBatch());
+                break;
+            case State.COUNTDOWN:
+                this.background.render(game.getBatch());
+                this.race.render(game.getBatch());
+                displayCountDown();
+                break;
+            case State.PAUSED:
+                //paused
+                break;
         }
         this.game.getBatch().end();
     }
@@ -175,5 +181,11 @@ public class MainGameScreen implements Screen {
     @Override
     public void dispose() {
         this.game.getBatch().dispose();
+    }
+
+    private static class State{
+        private static final byte RUNNING = 0;
+        private static final byte PAUSED = 1;
+        private static final byte COUNTDOWN = 2;
     }
 }
