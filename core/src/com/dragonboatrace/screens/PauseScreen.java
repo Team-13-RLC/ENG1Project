@@ -1,8 +1,57 @@
 package com.dragonboatrace.screens;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.dragonboatrace.DragonBoatRace;
+import com.dragonboatrace.entities.Button;
+import com.dragonboatrace.tools.ButtonFactory;
+import com.dragonboatrace.tools.Settings;
 
 public class PauseScreen implements Screen {
+    private final Runnable[] buttonActions;
+
+    private final String textureNames[] = {
+            "exit", // "exit"
+            "help", // "resume"
+            "play"  // "save"
+    };
+    private final Button buttons[] = new Button[3];
+
+    private final DragonBoatRace game;
+
+    private final BitmapFont font;
+    private final GlyphLayout layout;
+    private final String title = "The game is paused";
+
+    public PauseScreen(Screen previousScreen, DragonBoatRace game) {
+        buttonActions = new Runnable[]{
+                () -> Gdx.app.exit(),
+                () -> game.setScreen(previousScreen),
+                () -> System.out.println("Game is saved")
+        };
+        this.game = game;
+
+        for (int i = 0; i < buttons.length; i++) {
+            buttons[i] = ButtonFactory.mainMenu(textureNames[i] + "_button");
+        }
+
+        /* Font related items */
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("osaka-re.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size *= 10.0 / Settings.SCALAR;
+        parameter.color = Color.WHITE;
+        font = generator.generateFont(parameter);
+        layout = new GlyphLayout();
+        layout.setText(font, title);
+
+    }
+
     @Override
     public void show() {
 
@@ -10,7 +59,22 @@ public class PauseScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        Gdx.gl.glClearColor(1, 0, 0, 0.5f);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        setResumeState();
+        game.getBatch().begin();
 
+        font.draw(game.getBatch(), title, (Gdx.graphics.getWidth() - layout.width) / 2, Gdx.graphics.getHeight() - 100);
+        for (Button button : buttons) {
+            button.render(game.getBatch());
+        }
+
+        for (int i = 0; i < buttons.length; i++) {
+            if (buttons[i].isHovering() && Gdx.input.isTouched()) {
+                buttonActions[i].run();
+            }
+        }
+        game.getBatch().end();
     }
 
     @Override
@@ -37,5 +101,12 @@ public class PauseScreen implements Screen {
     public void dispose() {
 
     }
+
+    private void setResumeState() {
+        if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+            buttonActions[1].run(); // resume the game;
+        }
+    }
+
 
 }

@@ -1,6 +1,7 @@
 package com.dragonboatrace.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
@@ -63,6 +64,8 @@ public class MainGameScreen implements Screen {
      */
     private String countDownString = "";
 
+
+    private final PauseScreen pauseScreen;
     /**
      * Creates a new game screen with a game instance.
      *
@@ -71,6 +74,8 @@ public class MainGameScreen implements Screen {
      */
     public MainGameScreen(DragonBoatRace game, BoatType boatChosen) {
         this.game = game;
+        pauseScreen = new PauseScreen(this, game);
+
 
         this.logger = new FPSLogger();
 
@@ -128,6 +133,7 @@ public class MainGameScreen implements Screen {
     public void render(float deltaTime) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        setPausedState();
         this.game.getBatch().begin();
         switch (gameState){
             case State.RUNNING:
@@ -143,7 +149,8 @@ public class MainGameScreen implements Screen {
                 displayCountDown();
                 break;
             case State.PAUSED:
-                //paused
+                game.setScreen(pauseScreen);
+                gameState = State.RUNNING;
                 break;
         }
         this.game.getBatch().end();
@@ -176,6 +183,12 @@ public class MainGameScreen implements Screen {
     @Override
     public void hide() {
 
+    }
+
+    private void setPausedState(){
+        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+            gameState = State.PAUSED;
+        }
     }
 
     @Override
