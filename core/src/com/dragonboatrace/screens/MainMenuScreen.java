@@ -1,7 +1,6 @@
 package com.dragonboatrace.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -38,8 +37,14 @@ public class MainMenuScreen implements Screen {
      */
     private final Texture logo;
 
+    /**
+     * Array of functional interfaces that are invoked when each button is pressed.
+     */
     private final Runnable[] buttonActions;
 
+    /**
+     * Array of buttons.
+     */
     private final Button[] buttons = new Button[4];
 
     /**
@@ -131,6 +136,10 @@ public class MainMenuScreen implements Screen {
 
     }
 
+    /**
+     * Restores the game from the last save or notifies teh user if no such save exists.
+     * Invoked by a button
+     */
     private void restore() {
         try {
             Prefs.Restore.open();
