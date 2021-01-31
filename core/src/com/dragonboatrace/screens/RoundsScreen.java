@@ -13,6 +13,7 @@ import com.dragonboatrace.entities.boats.Boat;
 import com.dragonboatrace.tools.Settings;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 /**
@@ -117,7 +118,7 @@ public class RoundsScreen implements Screen {
 
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE))
             if (this.game.getRound() > 3) {
-                ArrayList<Float> temp = this.game.getTotalTimes();
+                ArrayList<Float> temp = new ArrayList<>(Arrays.asList(this.game.getTotalTimes()));
                 Collections.sort(temp);
                 ArrayList<Float> topPlayers = new ArrayList<>(temp.subList(0, 4));
                 if (topPlayers.contains(this.game.getPlayerTotalTime())) {

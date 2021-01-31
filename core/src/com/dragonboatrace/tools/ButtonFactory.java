@@ -13,27 +13,27 @@ import com.dragonboatrace.entities.EntityType;
 public class ButtonFactory {
 
     /**
-     * Static variable used to keep track of how many times the mainMenu method is called
+     * Static variable used to keep track of how many times the pause method is called
      */
-    private static int mainMenuButtonCount = 0;
+    private static int pauseButtonCount = 0;
 
     /**
-     * Creates the buttons on the MainMenuScreen.
+     * Creates the buttons on the PauseScreen.
      * yOffset is how far off the bottom edge of the screen the first button is.
      * spacing is how much space there is between the bottom of one button and the bottom of another.
-     * mainMenuButtonCount increments automatically,
+     * pauseButtonCount increments automatically,
      * so the buttons get spaced correctly without needing to provide exact coordinates for each.
      *
      * @param texturePrefix The first part of the name of the texture.
      * @return the instance of Button.
      */
-    public static Button mainMenu(String texturePrefix) {
+    public static Button pause(String texturePrefix) {
         float yOffset = 100f;
         float spacing = 10f + EntityType.BUTTON.getHeight();
         return new Button(
                 new Vector2(
                         (Gdx.graphics.getWidth() - EntityType.BUTTON.getWidth()) / 2.0f,
-                        (yOffset + spacing * ((mainMenuButtonCount++)%3)) / Settings.SCALAR
+                        (yOffset + spacing * ((pauseButtonCount++)%3)) / Settings.SCALAR
                 ),
                 texturePrefix + "_active.png",
                 texturePrefix + "_inactive.png"
@@ -71,6 +71,34 @@ public class ButtonFactory {
         float spacing = (EntityType.BUTTON.getWidth() + xOffset);
         return new Button(
                 new Vector2(xOffset + spacing * ((boatSelectionButtonCount++)%4), 100),
+                texturePrefix + "_active.png",
+                texturePrefix + "_inactive.png"
+        );
+    }
+
+    /**
+     * Static variable used to keep track of how many times the mainMenu method is called
+     */
+    private static int mainMenuButtonCount = 0;
+
+    /**
+     * Creates the buttons on the MainMenuScreen.
+     * yOffset is how far off the bottom edge of the screen the first button is.
+     * spacing is how much space there is between the bottom of one button and the bottom of another.
+     * mainMenuButtonCount increments automatically,
+     * so the buttons get spaced correctly without needing to provide exact coordinates for each.
+     *
+     * @param texturePrefix The first part of the name of the texture.
+     * @return the instance of Button.
+     */
+    public static Button mainMenu(String texturePrefix) {
+        float yOffset = 50f;
+        float spacing = 10f + EntityType.BUTTON.getHeight();
+        return new Button(
+                new Vector2(
+                        (Gdx.graphics.getWidth() - EntityType.BUTTON.getWidth()) / 2.0f,
+                        (yOffset + spacing * ((mainMenuButtonCount++)%4)) / Settings.SCALAR
+                ),
                 texturePrefix + "_active.png",
                 texturePrefix + "_inactive.png"
         );
