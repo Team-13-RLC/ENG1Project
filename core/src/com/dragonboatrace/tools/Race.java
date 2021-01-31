@@ -14,10 +14,7 @@ import com.dragonboatrace.screens.GameOverScreen;
 import com.dragonboatrace.screens.RoundsScreen;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -33,11 +30,11 @@ public class Race {
     /**
      * The list of boats in the race, not including the player.
      */
-    private final ArrayList<Boat> boats;
+    private final ArrayList<ComputerBoat> computerBoats;
     /**
      * The players boat.
      */
-    private final Boat player;
+    private Boat player;
     /**
      * The finish line.
      */
@@ -69,10 +66,10 @@ public class Race {
 
         this.barrier = new Texture("line.png");
 
-        boats = new ArrayList<>();
+        computerBoats = new ArrayList<>();
         for (int i = 1; i < Settings.PLAYER_COUNT; i++) {
             int rand = ThreadLocalRandom.current().nextInt(0, BoatType.values().length);
-            boats.add(new ComputerBoat(BoatType.values()[rand], new Lane(new Vector2(size * i, 0), size, round), "COMP" + i, i));
+            computerBoats.add(new ComputerBoat(BoatType.values()[rand], new Lane(new Vector2(size * i, 0), size, round), "COMP" + i, i));
         }
         this.timer = System.nanoTime();
     }
@@ -90,9 +87,9 @@ public class Race {
         if (player.getHealth() <= 0) {
             game.setScreen(new GameOverScreen(game, "Your boat is broken. Better luck next time!"));
         }
-        for (Boat boat : this.boats) {
+        for (ComputerBoat boat : this.computerBoats) {
 
-            ((ComputerBoat) boat).updateYPosition(player.getHitBox().getY(), player.getDistanceTravelled());
+            boat.updateYPosition(player.getHitBox().getY(), player.getDistanceTravelled());
             boat.update(deltaTime);
             if (boat.getDistanceTravelled() + this.theFinish.getHitBox().getHeight() >= this.length && boat.getTime() == 0) {
                 boat.setTime(Math.round((System.nanoTime() - this.timer) / 10000000) / (float) 100);
@@ -103,7 +100,7 @@ public class Race {
             player.setTime(Math.round((System.nanoTime() - this.timer) / 10000000) / (float) 100);
             player.setTotalTime(player.getTime());
             ArrayList<Float> dnfList = new ArrayList<>();
-            for (Boat boat : boats) {
+            for (Boat boat : computerBoats) {
                 if (boat.getTime() == 0) {
                     dnfList.add(boat.getDistanceTravelled());
                 }
@@ -111,7 +108,7 @@ public class Race {
             Collections.sort(dnfList);
             Collections.reverse(dnfList);
             for (float dist : dnfList) {
-                for (Boat boatN : boats) {
+                for (Boat boatN : computerBoats) {
                     if (boatN.getDistanceTravelled() == dist) {
                         switch (dnfList.indexOf(dist) + 1) {
                             case 1:
@@ -142,7 +139,7 @@ public class Race {
     public void render(SpriteBatch batch) {
         theFinish.render(batch);
         player.render(batch);
-        for (Boat boat : this.boats) {
+        for (Boat boat : this.computerBoats) {
             boat.render(batch);
         }
         for (int i = 0; i < Settings.PLAYER_COUNT; i++) {
@@ -157,6 +154,8 @@ public class Race {
      */
     public void getLeaderBoard(DragonBoatRace game) {
         ArrayList<Float> times = new ArrayList<>();
+        ArrayList<Boat> boats = new ArrayList<>(computerBoats);
+
         String reason = "";
         player.setTime(this.player.getPenaltyTime());
 
@@ -205,7 +204,6 @@ public class Race {
                 }
             }
         }
-        boats.remove(player);
         this.dispose();
         game.upRound();
         if (game.getRound() != 5) {
@@ -243,7 +241,7 @@ public class Race {
     }
 
     public void dispose() {
-        for (Boat boat : this.boats) {
+        for (Boat boat : this.computerBoats) {
             boat.dispose();
         }
         this.theFinish.dispose();
