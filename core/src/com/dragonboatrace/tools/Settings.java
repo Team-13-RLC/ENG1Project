@@ -20,7 +20,7 @@ public class Settings {
     /**
      * If the game is fullscreen or not.
      */
-    public static boolean FULLSCREEN = true;
+    public static boolean FULLSCREEN = false;
 
     /**
      * The global scalar at which to scale entities.
@@ -132,6 +132,7 @@ public class Settings {
         OBSTACLE_COLLISION_PENALTY = Prefs.Restore.getInteger("OBSTACLE_COLLISION_PENALTY");
         OBSTACLE_COLLISION_TIME = Prefs.Restore.getFloat("OBSTACLE_COLLISION_TIME");
         OBSTACLE_DAMAGE_MULTIPLIER = Prefs.Restore.getFloat("OBSTACLE_DAMAGE_MULTIPLIER");
+        PLAYER_COUNT = Prefs.Restore.getInteger("PLAYER_COUNT");
     }
 
     public static void save() {
@@ -142,5 +143,6 @@ public class Settings {
         Prefs.Save.putInteger("OBSTACLE_COLLISION_PENALTY", OBSTACLE_COLLISION_PENALTY );
         Prefs.Save.putFloat("OBSTACLE_COLLISION_TIME", OBSTACLE_COLLISION_TIME );
         Prefs.Save.putFloat("OBSTACLE_DAMAGE_MULTIPLIER", OBSTACLE_DAMAGE_MULTIPLIER );
+        Prefs.Save.putInteger("PLAYER_COUNT", PLAYER_COUNT);
     }
 }
