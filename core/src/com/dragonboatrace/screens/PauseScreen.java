@@ -75,7 +75,6 @@ public class PauseScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 1, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        setResumeState();
         game.getBatch().begin();
 
         font.draw(game.getBatch(), title, (Gdx.graphics.getWidth() - layout.width) / 2, Gdx.graphics.getHeight() - 100);
@@ -115,12 +114,4 @@ public class PauseScreen implements Screen {
     public void dispose() {
 
     }
-
-    private void setResumeState() {
-        if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
-            buttonActions[1].run(); // resume the game;
-        }
-    }
-
-
 }

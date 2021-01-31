@@ -106,6 +106,9 @@ public class MainMenuScreen implements Screen {
             }
         }
         this.game.getBatch().end();
+
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
+            game.setScreen(new PopupScreen("Test message", this, game));
     }
 
     @Override
