@@ -3,9 +3,10 @@ package com.dragonboatrace;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.dragonboatrace.screens.MainMenuScreen;
+import com.dragonboatrace.tools.Prefs;
 import com.dragonboatrace.tools.Settings;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Represents the Game itself and holds all the screens.
@@ -27,7 +28,8 @@ public class DragonBoatRace extends Game {
     /**
      * A list of cumulative times for all boats.
      */
-    protected ArrayList<Float> totalTimes = new ArrayList<>();
+    //This is using Float instead of float, because of what happens to this array later.
+    protected Float[] totalTimes = new Float[Settings.PLAYER_COUNT];
 
     /**
      * The players total time.
@@ -38,8 +40,8 @@ public class DragonBoatRace extends Game {
     public void create() {
         batch = new SpriteBatch();
         this.setScreen(new MainMenuScreen(this));
-        for (int i = 0; i < Settings.PLAYER_COUNT; i++)
-            totalTimes.add((float) 0);
+
+        Arrays.fill(totalTimes, 0f);
     }
 
     @Override
@@ -69,7 +71,7 @@ public class DragonBoatRace extends Game {
     }
 
     public void setTimeAt(int i, float t) {
-        this.totalTimes.set(i, this.totalTimes.get(i) + t);
+        totalTimes[i] += t;
     }
 
     public float getPlayerTotalTime() {
@@ -80,7 +82,7 @@ public class DragonBoatRace extends Game {
         this.playerTotalTime += t;
     }
 
-    public ArrayList<Float> getTotalTimes() {
+    public Float[] getTotalTimes() {
         return this.totalTimes;
     }
 }
