@@ -13,15 +13,15 @@ import com.dragonboatrace.entities.EntityType;
 public class ButtonFactory {
 
     /**
-     * Static variable used to keep track of how many times the mainMenu method is called
+     * Static variable used to keep track of how many times the pause method is called
      */
     private static int pauseButtonCount = 0;
 
     /**
-     * Creates the buttons on the MainMenuScreen.
+     * Creates the buttons on the PauseScreen.
      * yOffset is how far off the bottom edge of the screen the first button is.
      * spacing is how much space there is between the bottom of one button and the bottom of another.
-     * mainMenuButtonCount increments automatically,
+     * pauseButtonCount increments automatically,
      * so the buttons get spaced correctly without needing to provide exact coordinates for each.
      *
      * @param texturePrefix The first part of the name of the texture.
@@ -76,8 +76,21 @@ public class ButtonFactory {
         );
     }
 
+    /**
+     * Static variable used to keep track of how many times the mainMenu method is called
+     */
     private static int mainMenuButtonCount = 0;
 
+    /**
+     * Creates the buttons on the MainMenuScreen.
+     * yOffset is how far off the bottom edge of the screen the first button is.
+     * spacing is how much space there is between the bottom of one button and the bottom of another.
+     * mainMenuButtonCount increments automatically,
+     * so the buttons get spaced correctly without needing to provide exact coordinates for each.
+     *
+     * @param texturePrefix The first part of the name of the texture.
+     * @return the instance of Button.
+     */
     public static Button mainMenu(String texturePrefix) {
         float yOffset = 50f;
         float spacing = 10f + EntityType.BUTTON.getHeight();
