@@ -27,45 +27,59 @@ public class MainGameScreen implements Screen {
      * The game instance.
      */
     private final DragonBoatRace game;
+
     /**
      * Used to make sure the countdown happens at equal intervals.
      */
     private final Timer timer;
+
     /**
      * The race instance.
      */
     private final Race race;
+
     /**
      * The background of the window.
      */
     private final ScrollingBackground background;
+
     /**
      * Use to log the FPS for debugging.
      */
     private final FPSLogger logger;
+
     /**
      * GlyphLayout used for centering fonts
      */
     private final GlyphLayout layout;
+
     /**
      * Font used for rendering to screen
      */
     private final BitmapFont font;
+
     /**
-     * Pause game, starts true.
+     * What state the game is in, starts in COUNTDOWN.
+     * Can also be RUNNING or PAUSED.
      */
     private byte gameState = State.COUNTDOWN;
+
     /**
      * The time left on the initial countdown.
      */
     private int countDownRemaining = 3;
+
     /**
      * The String being displayed in the countdown.
      */
     private String countDownString = "";
 
-
+    /**
+     * The screen the user sees when the game is paused
+     */
     private final PauseScreen pauseScreen;
+
+
     /**
      * Creates a new game screen with a game instance.
      *
@@ -127,7 +141,7 @@ public class MainGameScreen implements Screen {
 
     /**
      * Render the main game window. Includes rendering the background and the {@link Race}.
-     *
+     * Will switch to the pause screen if gameState is PAUSED
      * @param deltaTime The time since the last frame.
      */
     public void render(float deltaTime) {
@@ -185,8 +199,11 @@ public class MainGameScreen implements Screen {
 
     }
 
+    /**
+     * Check if game is being paused, if it is, gameState is set to PAUSED
+     */
     private void setPausedState(){
-        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
             gameState = State.PAUSED;
         }
     }
@@ -204,6 +221,9 @@ public class MainGameScreen implements Screen {
         race.save();
     }
 
+    /**
+     * Giving names to game states.
+     */
     private static class State{
         private static final byte RUNNING = 0;
         private static final byte PAUSED = 1;
