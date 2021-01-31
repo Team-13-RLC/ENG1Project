@@ -11,30 +11,35 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.dragonboatrace.DragonBoatRace;
 import com.dragonboatrace.entities.Button;
 import com.dragonboatrace.tools.ButtonFactory;
+import com.dragonboatrace.tools.Prefs;
 import com.dragonboatrace.tools.Settings;
 
 public class PauseScreen implements Screen {
     private final Runnable[] buttonActions;
 
-    private final String textureNames[] = {
-            "exit", // "exit"
-            "help", // "resume"
-            "play"  // "save"
-    };
-    private final Button buttons[] = new Button[3];
+    private final Button[] buttons = new Button[3];
 
     private final DragonBoatRace game;
+    private final MainGameScreen previousScreen;
 
     private final BitmapFont font;
     private final GlyphLayout layout;
     private final String title = "The game is paused";
 
-    public PauseScreen(Screen previousScreen, DragonBoatRace game) {
+    public PauseScreen(MainGameScreen previousScreen, DragonBoatRace game) {
+        final String[] textureNames = {
+                "exit", // "exit"
+                "help", // "resume"
+                "play"  // "save"
+        };
+        this.previousScreen = previousScreen;
+
         buttonActions = new Runnable[]{
                 () -> Gdx.app.exit(),
                 () -> game.setScreen(previousScreen),
                 () -> {
                     System.out.println("Game is saved");
+                    save();
                 }
         };
         this.game = game;
@@ -52,6 +57,13 @@ public class PauseScreen implements Screen {
         layout = new GlyphLayout();
         layout.setText(font, title);
 
+    }
+
+    private void save() {
+        Prefs.Save.open();
+        game.save();
+        previousScreen.save();
+        Prefs.Save.close();
     }
 
     @Override

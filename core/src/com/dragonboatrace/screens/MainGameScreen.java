@@ -200,6 +200,10 @@ public class MainGameScreen implements Screen {
         race.restore();
     }
 
+    public void save() {
+        race.save();
+    }
+
     private static class State{
         private static final byte RUNNING = 0;
         private static final byte PAUSED = 1;

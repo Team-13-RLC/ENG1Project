@@ -97,21 +97,9 @@ public class MainMenuScreen implements Screen {
             game.setScreen(new HelpScreen(this));
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
-            try {
-                Prefs.Restore.open();
-            } catch (Prefs.SaveDoesNotExist saveDoesNotExist) {
-                System.out.println("saveDoesNotExist");
-                saveDoesNotExist.printStackTrace();
-            }
-            game.restore();
-
-            // BoatType does not matter as it will be replaced
-            MainGameScreen mainGameScreen = new MainGameScreen(game, BoatType.AGILE);
-            mainGameScreen.restore();
-            Prefs.Restore.close();
-            game.setScreen(mainGameScreen); //Passing a
-        }
+        //FIXME: This is temporary and should be replaced by a button
+        if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
+            restore();
 
         this.game.getBatch().end();
     }
@@ -136,6 +124,21 @@ public class MainMenuScreen implements Screen {
     @Override
     public void dispose() {
 
+    }
+    private void restore(){
+        try {
+            Prefs.Restore.open();
+        } catch (Prefs.SaveDoesNotExist saveDoesNotExist) {
+            System.out.println("saveDoesNotExist");
+            saveDoesNotExist.printStackTrace();
+        }
+        game.restore();
+
+        // BoatType does not matter as it will be replaced
+        MainGameScreen mainGameScreen = new MainGameScreen(game, BoatType.AGILE);
+        mainGameScreen.restore();
+        Prefs.Restore.close();
+        game.setScreen(mainGameScreen);
     }
 
 }

@@ -504,4 +504,14 @@ public class Boat extends Entity {
         totalTime = Prefs.Restore.getFloat("totalTime" + name);
         penaltyTime = Prefs.Restore.getFloat("penaltyTime" + name);
     }
+
+    public void save(){
+        super.save(name);
+        Prefs.Save.putBoatType("boatType" + name, boatType );
+        Prefs.Save.putFloat("health" + name, health );
+        Prefs.Save.putFloat("stamina" + name, stamina );
+        Prefs.Save.putFloat("time" + name, time );
+        Prefs.Save.putFloat("totalTime" + name, totalTime );
+        Prefs.Save.putFloat("penaltyTime" + name, penaltyTime );
+    }
 }

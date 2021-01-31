@@ -100,4 +100,9 @@ public abstract class Entity {
         position = Prefs.Restore.getVector2("position" + name);
         velocity = Prefs.Restore.getVector2("velocity" + name);
     }
+
+    public void save(String name){
+         Prefs.Save.putVector2("position" + name, position );
+         Prefs.Save.putVector2("velocity" + name, velocity );
+    }
 }

@@ -6,16 +6,17 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Json;
 import com.dragonboatrace.entities.boats.BoatType;
 
+import java.util.Arrays;
+
 public class Prefs {
     private static final Preferences prefs = Gdx.app.getPreferences("save_data");
     private static final Json json = new Json();
 
     public static class Save {
-        public static void open() {
-            prefs.putInteger("save_exists", 1);
-        }
+        public static void open() {} // also for consistency
 
         public static void close() {
+            prefs.putInteger("save_exists", 1);
             prefs.flush();
         }
 
@@ -40,6 +41,9 @@ public class Prefs {
             prefs.putFloat(key + 'y', v.y);
         }
 
+        public static void putBoatType(String key, BoatType b) {
+            prefs.putInteger(key, Arrays.asList(BoatType.values()).indexOf(b));
+            }
     }
 
     public static class Restore {

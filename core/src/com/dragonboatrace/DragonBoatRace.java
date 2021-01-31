@@ -91,4 +91,10 @@ public class DragonBoatRace extends Game {
         playerTotalTime = Prefs.Restore.getFloat("playerTotalTime");
         totalTimes = Prefs.Restore.getArray("totalTimes");
     }
+
+    public void save() {
+        Prefs.Save.putInteger("round", round);
+        Prefs.Save.putFloat("playerTotalTime",playerTotalTime);
+        Prefs.Save.putArray("totalTimes", totalTimes);
+    }
 }

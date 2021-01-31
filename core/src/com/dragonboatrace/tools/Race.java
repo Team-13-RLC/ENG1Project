@@ -54,7 +54,7 @@ public class Race {
      *
      * @param raceLength The length of the race.
      * @param boatChosen The {@link BoatType} that the player chose.
-     * @param round The current round of the race.
+     * @param round      The current round of the race.
      */
     public Race(int raceLength, BoatType boatChosen, int round) {
         this.length = raceLength;
@@ -78,7 +78,7 @@ public class Race {
      * Update the race in respects to the amount of time passed since the last frame.
      *
      * @param deltaTime The time since the last frame.
-     * @param game The instance of the game.
+     * @param game      The instance of the game.
      */
     public void update(float deltaTime, DragonBoatRace game) {
         player.updateYPosition(this.theFinish.getHitBox().getHeight(), length);
@@ -254,5 +254,13 @@ public class Race {
             boat.restore();
         }
         timer = Prefs.Restore.getFloat("timer");
+    }
+
+    public void save() {
+        player.save();
+        for (ComputerBoat boat : computerBoats) {
+            boat.save();
+        }
+        Prefs.Save.putFloat("timer", timer);
     }
 }
