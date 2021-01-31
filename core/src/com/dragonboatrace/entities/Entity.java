@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.dragonboatrace.tools.Hitbox;
+import com.dragonboatrace.tools.Prefs;
 
 /**
  * Represents a generic Entity.
@@ -93,5 +94,10 @@ public abstract class Entity {
      */
     public Hitbox getHitBox() {
         return this.hitbox;
+    }
+
+    public void restore(String name){
+        position = Prefs.Restore.getVector2("position" + name);
+        velocity = Prefs.Restore.getVector2("velocity" + name);
     }
 }

@@ -34,7 +34,7 @@ public class Race {
     /**
      * The players boat.
      */
-    private Boat player;
+    private final Boat player;
     /**
      * The finish line.
      */
@@ -246,5 +246,13 @@ public class Race {
         }
         this.theFinish.dispose();
         this.barrier.dispose();
+    }
+
+    public void restore() {
+        player.restore();
+        for (ComputerBoat boat : computerBoats) {
+            boat.restore();
+        }
+        timer = Prefs.Restore.getFloat("timer");
     }
 }

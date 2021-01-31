@@ -28,8 +28,8 @@ public class DragonBoatRace extends Game {
     /**
      * A list of cumulative times for all boats.
      */
-    //This is using Float instead of float, because of what happens to this array later.
     protected Float[] totalTimes = new Float[Settings.PLAYER_COUNT];
+    //This is using Float instead of float, because of what happens to this array later.
 
     /**
      * The players total time.
@@ -84,5 +84,11 @@ public class DragonBoatRace extends Game {
 
     public Float[] getTotalTimes() {
         return this.totalTimes;
+    }
+
+    public void restore() {
+        round = Prefs.Restore.getInteger("round");
+        playerTotalTime = Prefs.Restore.getFloat("playerTotalTime");
+        totalTimes = Prefs.Restore.getArray("totalTimes");
     }
 }

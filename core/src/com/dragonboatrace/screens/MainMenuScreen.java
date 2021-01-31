@@ -1,14 +1,15 @@
 package com.dragonboatrace.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
 import com.dragonboatrace.DragonBoatRace;
 import com.dragonboatrace.entities.Button;
-import com.dragonboatrace.entities.EntityType;
+import com.dragonboatrace.entities.boats.BoatType;
 import com.dragonboatrace.tools.ButtonFactory;
+import com.dragonboatrace.tools.Prefs;
 import com.dragonboatrace.tools.Settings;
 
 /**
@@ -58,6 +59,7 @@ public class MainMenuScreen implements Screen {
         this.exitButton = ButtonFactory.mainMenu("exit_button");
         this.helpButton = ButtonFactory.mainMenu("help_button");
         this.playButton = ButtonFactory.mainMenu("play_button");
+        //TODO: add a "load" button
         this.logo = new Texture("dragon.png");
         logoXOffset = 680f / Settings.SCALAR;
         logoYOffset = 600f / Settings.SCALAR;
@@ -93,6 +95,22 @@ public class MainMenuScreen implements Screen {
         helpButton.render(this.game.getBatch());
         if (this.helpButton.isHovering() && Gdx.input.isTouched()) {
             game.setScreen(new HelpScreen(this));
+        }
+
+        if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
+            try {
+                Prefs.Restore.open();
+            } catch (Prefs.SaveDoesNotExist saveDoesNotExist) {
+                System.out.println("saveDoesNotExist");
+                saveDoesNotExist.printStackTrace();
+            }
+            game.restore();
+
+            // BoatType does not matter as it will be replaced
+            MainGameScreen mainGameScreen = new MainGameScreen(game, BoatType.AGILE);
+            mainGameScreen.restore();
+            Prefs.Restore.close();
+            game.setScreen(mainGameScreen); //Passing a
         }
 
         this.game.getBatch().end();

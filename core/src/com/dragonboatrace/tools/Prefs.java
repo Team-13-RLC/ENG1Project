@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Json;
+import com.dragonboatrace.entities.boats.BoatType;
 
 public class Prefs {
     private static final Preferences prefs = Gdx.app.getPreferences("save_data");
@@ -70,6 +71,10 @@ public class Prefs {
         public static Vector2 getVector2(String key) {
             return new Vector2(prefs.getFloat(key + 'x'), prefs.getFloat(key + 'y'));
 
+        }
+
+        public static BoatType getBoatType(String key) {
+            return BoatType.values()[prefs.getInteger(key)];
         }
     }
 

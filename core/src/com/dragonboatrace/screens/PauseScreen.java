@@ -33,7 +33,9 @@ public class PauseScreen implements Screen {
         buttonActions = new Runnable[]{
                 () -> Gdx.app.exit(),
                 () -> game.setScreen(previousScreen),
-                () -> System.out.println("Game is saved")
+                () -> {
+                    System.out.println("Game is saved");
+                }
         };
         this.game = game;
 

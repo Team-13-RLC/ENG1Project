@@ -10,10 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.dragonboatrace.entities.Collidable;
 import com.dragonboatrace.entities.Entity;
 import com.dragonboatrace.entities.EntityType;
-import com.dragonboatrace.tools.Hitbox;
-import com.dragonboatrace.tools.Lane;
-import com.dragonboatrace.tools.Settings;
-import com.dragonboatrace.tools.VectorFactory;
+import com.dragonboatrace.tools.*;
 
 /**
  * Represents a generic Boat.
@@ -50,7 +47,7 @@ public class Boat extends Entity {
     /**
      * The agility of the boat.
      */
-    protected float agility;
+    protected final float agility;
 
     /**
      * The speed of the boat.
@@ -491,5 +488,20 @@ public class Boat extends Entity {
 
         this.lane.dispose();
         super.dispose();
+    }
+
+    public void restore(){
+        super.restore(name);
+        boatType = Prefs.Restore.getBoatType("boatType" + name);
+
+        health = Prefs.Restore.getFloat("health" + name);
+        stamina = Prefs.Restore.getFloat("stamina" + name);
+
+        speed = boatType.getSpeed();
+        maxStamina = boatType.getStamina();
+
+        time = Prefs.Restore.getFloat("time" + name);
+        totalTime = Prefs.Restore.getFloat("totalTime" + name);
+        penaltyTime = Prefs.Restore.getFloat("penaltyTime" + name);
     }
 }

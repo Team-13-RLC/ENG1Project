@@ -196,6 +196,10 @@ public class MainGameScreen implements Screen {
         this.game.getBatch().dispose();
     }
 
+    public void restore() {
+        race.restore();
+    }
+
     private static class State{
         private static final byte RUNNING = 0;
         private static final byte PAUSED = 1;
