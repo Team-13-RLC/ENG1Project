@@ -1,7 +1,6 @@
 package com.dragonboatrace.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -16,17 +15,40 @@ import com.dragonboatrace.tools.Prefs;
 import com.dragonboatrace.tools.Settings;
 
 public class PauseScreen implements Screen {
+    /**
+     * Array of function pointers invoked by button presses.
+     */
     private final Runnable[] buttonActions;
 
+    /**
+     * Array of buttons.
+     */
     private final Button[] buttons = new Button[3];
 
+    /**
+     * The instance of teh game.
+     */
     private final DragonBoatRace game;
+
+    /**
+     * The screen which lead to this one.
+     */
     private final MainGameScreen previousScreen;
 
+    /* Font setup */
     private final BitmapFont font;
     private final GlyphLayout layout;
+
+    /**
+     * Title of this screen.
+     */
     private final String title = "The game is paused";
 
+    /**
+     * Instance of the pause screen
+     * @param previousScreen The screen where this screen was created
+     * @param game instance of the game
+     */
     public PauseScreen(MainGameScreen previousScreen, DragonBoatRace game) {
         final String[] textureNames = {
                 "exit",
@@ -57,6 +79,9 @@ public class PauseScreen implements Screen {
 
     }
 
+    /**
+     * Creating (or updating) the save. Notifies the user when this is done.
+     */
     private void save() {
         Prefs.Save.open();
         game.save();
@@ -72,6 +97,10 @@ public class PauseScreen implements Screen {
 
     }
 
+    /**
+     * Renders the screen
+     * @param delta time delta
+     */
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 1, 1f);
