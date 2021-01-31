@@ -13,20 +13,39 @@ import com.dragonboatrace.tools.Settings;
 
 public class PopupScreen implements Screen {
 
+    /**
+     * Instance of the game
+     */
     private final DragonBoatRace game;
+
+    /**
+     * Screen which lead to this one
+     */
     private final Screen previousScreen;
 
+    /* Setting up fonts for both title and the message */
     private final BitmapFont titleFont;
     private final BitmapFont messageFont;
     private final GlyphLayout titleLayout;
     private final GlyphLayout messageLayout;
 
+    /**
+     * Text at the top of the screen.
+     */
     private final String title = "Press Space to continue";
+
+    /**
+     * Text in the middle of the screen. Passed to the constructor.
+     */
     private final String message;
 
-
+    /**
+     * Instantiates the screen
+     * @param message Printed in the center of the screen
+     * @param previousScreen Screen where the popup was created
+     * @param game instance of the game
+     */
     PopupScreen(String message, Screen previousScreen, DragonBoatRace game) {
-        System.out.println("yes");
         this.message = message;
         this.previousScreen = previousScreen;
         this.game = game;
@@ -53,6 +72,10 @@ public class PopupScreen implements Screen {
 
     }
 
+    /**
+     * Rendering the screen
+     * @param delta time delta
+     */
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 1, 1f);
