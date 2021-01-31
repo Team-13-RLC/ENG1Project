@@ -22,12 +22,9 @@ public class DifficultySelectScreen implements Screen {
      */
     private final String[] textureNames = {
             "easy",
-            "easy",
-            "easy",
-            "easy"
-//            "medium",
-//            "hard",
-//            "very_hard"
+            "medium",
+            "hard",
+            "very_hard"
     };
 
     /**
