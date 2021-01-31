@@ -27,7 +27,7 @@ public class ButtonFactory {
      * @param texturePrefix The first part of the name of the texture.
      * @return the instance of Button.
      */
-    public static Button mainMenu(String texturePrefix) {
+    public static Button pause(String texturePrefix) {
         float yOffset = 100f;
         float spacing = 10f + EntityType.BUTTON.getHeight();
         return new Button(
@@ -71,6 +71,19 @@ public class ButtonFactory {
         float spacing = (EntityType.BUTTON.getWidth() + xOffset);
         return new Button(
                 new Vector2(xOffset + spacing * ((boatSelectionButtonCount++)%4), 100),
+                texturePrefix + "_active.png",
+                texturePrefix + "_inactive.png"
+        );
+    }
+
+    public static Button mainMenu(String texturePrefix) {
+        float yOffset = 50f;
+        float spacing = 10f + EntityType.BUTTON.getHeight();
+        return new Button(
+                new Vector2(
+                        (Gdx.graphics.getWidth() - EntityType.BUTTON.getWidth()) / 2.0f,
+                        (yOffset + spacing * ((mainMenuButtonCount++)%4)) / Settings.SCALAR
+                ),
                 texturePrefix + "_active.png",
                 texturePrefix + "_inactive.png"
         );

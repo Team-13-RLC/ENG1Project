@@ -31,22 +31,15 @@ public class MainMenuScreen implements Screen {
      * The logo position Y offset.
      */
     private final float logoYOffset;
-    /**
-     * The button used to exit the game.
-     */
-    private final Button exitButton;
-    /**
-     * The button used to start the game.
-     */
-    private final Button playButton;
-    /**
-     * The button used to go to the help screen.
-     */
-    private final Button helpButton;
+
     /**
      * The texture of the main logo.
      */
     private final Texture logo;
+
+    private final Runnable[] buttonActions;
+
+    private final Button[] buttons = new Button[4];
 
     /**
      * Creates a new window that shows the main menu of the game.
@@ -55,14 +48,27 @@ public class MainMenuScreen implements Screen {
      */
     public MainMenuScreen(DragonBoatRace game) {
         this.game = game;
-        // Note: Order matters. Buttons have to appear in opposite order
-        this.exitButton = ButtonFactory.mainMenu("exit_button");
-        this.helpButton = ButtonFactory.mainMenu("help_button");
-        this.playButton = ButtonFactory.mainMenu("play_button");
-        //TODO: add a "load" button
+        final String[] textureNames = {
+                "exit",
+                "help",
+                "resume",
+                "play"
+        };
+
+        buttonActions = new Runnable[]{
+                () -> Gdx.app.exit(),
+                () -> game.setScreen(new HelpScreen(this)),
+                this::restore,
+                () -> game.setScreen(new BoatSelectScreen(game))
+        };
+
+        for (int i = 0; i < buttons.length; i++) {
+            buttons[i] = ButtonFactory.mainMenu(textureNames[i] + "_button");
+        }
+
         this.logo = new Texture("dragon.png");
-        logoXOffset = 680f / Settings.SCALAR;
-        logoYOffset = 600f / Settings.SCALAR;
+        logoXOffset = 408f / Settings.SCALAR;
+        logoYOffset = 360f / Settings.SCALAR;
     }
 
 
@@ -82,25 +88,23 @@ public class MainMenuScreen implements Screen {
 
         this.game.getBatch().begin();
 
-        this.game.getBatch().draw(logo, (Gdx.graphics.getWidth() - logoXOffset) / 2.0f, (Gdx.graphics.getHeight() - logoYOffset + playButton.getHitBox().getHeight() + playButton.getHitBox().getY()) / 2.0f, logoXOffset, logoYOffset);
+        this.game.getBatch().draw(
+                logo,
+                (Gdx.graphics.getWidth() - logoXOffset) / 2.0f,
+                (Gdx.graphics.getHeight() - logoYOffset + buttons[buttons.length - 1].getHitBox().getHeight() + buttons[buttons.length -1].getHitBox().getY()) / 2.0f,
+                logoXOffset,
+                logoYOffset
+        );
 
-        exitButton.render(this.game.getBatch());
-        if (this.exitButton.isHovering() && Gdx.input.isTouched()) {
-            Gdx.app.exit();
-        }
-        playButton.render(this.game.getBatch());
-        if (this.playButton.isHovering() && Gdx.input.isTouched()) {
-            game.setScreen(new BoatSelectScreen(this.game));
-        }
-        helpButton.render(this.game.getBatch());
-        if (this.helpButton.isHovering() && Gdx.input.isTouched()) {
-            game.setScreen(new HelpScreen(this));
+        for (Button button : buttons) {
+            button.render(game.getBatch());
         }
 
-        //FIXME: This is temporary and should be replaced by a button
-        if(Gdx.input.isKeyPressed(Input.Keys.SPACE))
-            restore();
-
+        for (int i = 0; i < buttons.length; i++) {
+            if (buttons[i].isHovering() && Gdx.input.isTouched()) {
+                buttonActions[i].run();
+            }
+        }
         this.game.getBatch().end();
     }
 
@@ -125,7 +129,8 @@ public class MainMenuScreen implements Screen {
     public void dispose() {
 
     }
-    private void restore(){
+
+    private void restore() {
         try {
             Prefs.Restore.open();
         } catch (Prefs.SaveDoesNotExist saveDoesNotExist) {

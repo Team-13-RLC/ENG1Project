@@ -45,7 +45,7 @@ public class PauseScreen implements Screen {
         this.game = game;
 
         for (int i = 0; i < buttons.length; i++) {
-            buttons[i] = ButtonFactory.mainMenu(textureNames[i] + "_button");
+            buttons[i] = ButtonFactory.pause(textureNames[i] + "_button");
         }
 
         /* Font related items */
