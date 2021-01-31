@@ -124,4 +124,23 @@ public class Settings {
         OBSTACLE_COLLISION_TIME = obstacleCollisionTime;
     }
 
+    public static void restore() {
+        STAMINA_SPEED_DIVISION = Prefs.Restore.getInteger("STAMINA_SPEED_DIVISION");
+        COLLIDABLE_SPAWN_RATE_MIN = Prefs.Restore.getFloat("COLLIDABLE_SPAWN_RATE_MIN");
+        COLLIDABLE_SPAWN_RATE_MAX = Prefs.Restore.getFloat("COLLIDABLE_SPAWN_RATE_MAX");
+        OBSTACLE_SPAWN_CHANCE = Prefs.Restore.getFloat("OBSTACLE_SPAWN_CHANCE");
+        OBSTACLE_COLLISION_PENALTY = Prefs.Restore.getInteger("OBSTACLE_COLLISION_PENALTY");
+        OBSTACLE_COLLISION_TIME = Prefs.Restore.getFloat("OBSTACLE_COLLISION_TIME");
+        OBSTACLE_DAMAGE_MULTIPLIER = Prefs.Restore.getFloat("OBSTACLE_DAMAGE_MULTIPLIER");
+    }
+
+    public static void save() {
+        Prefs.Save.putInteger("STAMINA_SPEED_DIVISION", STAMINA_SPEED_DIVISION );
+        Prefs.Save.putFloat("COLLIDABLE_SPAWN_RATE_MIN", COLLIDABLE_SPAWN_RATE_MIN );
+        Prefs.Save.putFloat("COLLIDABLE_SPAWN_RATE_MAX", COLLIDABLE_SPAWN_RATE_MAX );
+        Prefs.Save.putFloat("OBSTACLE_SPAWN_CHANCE",(float) OBSTACLE_SPAWN_CHANCE );
+        Prefs.Save.putInteger("OBSTACLE_COLLISION_PENALTY", OBSTACLE_COLLISION_PENALTY );
+        Prefs.Save.putFloat("OBSTACLE_COLLISION_TIME", OBSTACLE_COLLISION_TIME );
+        Prefs.Save.putFloat("OBSTACLE_DAMAGE_MULTIPLIER", OBSTACLE_DAMAGE_MULTIPLIER );
+    }
 }

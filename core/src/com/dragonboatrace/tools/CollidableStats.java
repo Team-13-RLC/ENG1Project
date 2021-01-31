@@ -21,5 +21,18 @@ public class CollidableStats {
      */
     public final static int POWERUPS_START_AT_INDEX = 3;
 
-    private CollidableStats(){} //Make sure this is never instantiated
+    private CollidableStats() {
+    } //Make sure this is never instantiated
+
+    public static void restore() {
+        INVULN_FOR = Prefs.Restore.getFloat("INVULN_FOR");
+        SPEEDUP_FOR = Prefs.Restore.getFloat("SPEEDUP_FOR");
+        LESSDAMAGE_FOR = Prefs.Restore.getFloat("LESSDAMAGE_FOR");
+    }
+
+    public static void save() {
+        Prefs.Save.putFloat("INVULN_FOR", INVULN_FOR );
+        Prefs.Save.putFloat("SPEEDUP_FOR", SPEEDUP_FOR );
+        Prefs.Save.putFloat("LESSDAMAGE_FOR", LESSDAMAGE_FOR );
+    }
 }
