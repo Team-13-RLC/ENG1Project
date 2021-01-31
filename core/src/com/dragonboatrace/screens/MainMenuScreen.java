@@ -9,6 +9,7 @@ import com.dragonboatrace.DragonBoatRace;
 import com.dragonboatrace.entities.Button;
 import com.dragonboatrace.entities.boats.BoatType;
 import com.dragonboatrace.tools.ButtonFactory;
+import com.dragonboatrace.tools.CollidableStats;
 import com.dragonboatrace.tools.Prefs;
 import com.dragonboatrace.tools.Settings;
 
@@ -106,9 +107,6 @@ public class MainMenuScreen implements Screen {
             }
         }
         this.game.getBatch().end();
-
-        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
-            game.setScreen(new PopupScreen("Test message", this, game));
     }
 
     @Override
@@ -137,11 +135,12 @@ public class MainMenuScreen implements Screen {
         try {
             Prefs.Restore.open();
         } catch (Prefs.SaveDoesNotExist saveDoesNotExist) {
-            System.out.println("saveDoesNotExist");
-            saveDoesNotExist.printStackTrace();
+            game.setScreen(new PopupScreen("Could not find a saved game", this, game));
+            return;
         }
         game.restore();
-
+        Settings.restore();
+        CollidableStats.restore();
         // BoatType does not matter as it will be replaced
         MainGameScreen mainGameScreen = new MainGameScreen(game, BoatType.AGILE);
         mainGameScreen.restore();

@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.dragonboatrace.DragonBoatRace;
 import com.dragonboatrace.entities.Button;
 import com.dragonboatrace.tools.ButtonFactory;
+import com.dragonboatrace.tools.CollidableStats;
 import com.dragonboatrace.tools.Prefs;
 import com.dragonboatrace.tools.Settings;
 
@@ -37,10 +38,7 @@ public class PauseScreen implements Screen {
         buttonActions = new Runnable[]{
                 () -> Gdx.app.exit(),
                 () -> game.setScreen(previousScreen),
-                () -> {
-                    System.out.println("Game is saved");
-                    save();
-                }
+                this::save
         };
         this.game = game;
 
@@ -63,7 +61,10 @@ public class PauseScreen implements Screen {
         Prefs.Save.open();
         game.save();
         previousScreen.save();
+        Settings.save();
+        CollidableStats.save();
         Prefs.Save.close();
+        game.setScreen(new PopupScreen("Game was saved", this, game));
     }
 
     @Override

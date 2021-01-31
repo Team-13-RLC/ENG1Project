@@ -15,7 +15,7 @@ public class ButtonFactory {
     /**
      * Static variable used to keep track of how many times the mainMenu method is called
      */
-    private static int mainMenuButtonCount = 0;
+    private static int pauseButtonCount = 0;
 
     /**
      * Creates the buttons on the MainMenuScreen.
@@ -33,7 +33,7 @@ public class ButtonFactory {
         return new Button(
                 new Vector2(
                         (Gdx.graphics.getWidth() - EntityType.BUTTON.getWidth()) / 2.0f,
-                        (yOffset + spacing * ((mainMenuButtonCount++)%3)) / Settings.SCALAR
+                        (yOffset + spacing * ((pauseButtonCount++)%3)) / Settings.SCALAR
                 ),
                 texturePrefix + "_active.png",
                 texturePrefix + "_inactive.png"
@@ -75,6 +75,8 @@ public class ButtonFactory {
                 texturePrefix + "_inactive.png"
         );
     }
+
+    private static int mainMenuButtonCount = 0;
 
     public static Button mainMenu(String texturePrefix) {
         float yOffset = 50f;
