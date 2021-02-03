@@ -113,7 +113,7 @@ public class BoatSelectScreen implements Screen {
         }
 
         for (int i = 0; i < buttons.length; i++) {
-            if (buttons[i].isHovering() && Gdx.input.isTouched()) {
+            if (buttons[i].isHovering() && Gdx.input.justTouched()) {
                 this.game.setScreen(new DifficultySelectScreen(this.game, BoatType.values()[i]));
             }
         }
