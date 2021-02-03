@@ -113,7 +113,7 @@ public class PauseScreen implements Screen {
         }
 
         for (int i = 0; i < buttons.length; i++) {
-            if (buttons[i].isHovering() && Gdx.input.isTouched()) {
+            if (buttons[i].isHovering() && Gdx.input.justTouched()) {
                 buttonActions[i].run();
             }
         }

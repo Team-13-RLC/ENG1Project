@@ -181,7 +181,7 @@ public class HelpScreen implements Screen {
             batch.draw(this.downArrow, Gdx.graphics.getWidth() / 2f - 50f/Settings.SCALAR, 0, 100f/Settings.SCALAR, 100f/Settings.SCALAR);
         }
         backButton.render(batch);
-        if (this.backButton.isHovering() && Gdx.input.isTouched()) {
+        if (this.backButton.isHovering() && Gdx.input.justTouched()) {
             this.mainMenu.game.setScreen(this.mainMenu);
         }
         batch.end();
