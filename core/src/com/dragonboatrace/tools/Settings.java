@@ -68,6 +68,11 @@ public class Settings {
     public static float OBSTACLE_DAMAGE_MULTIPLIER = 1.0f;
 
     /**
+     * Name of the file where the data will be saved
+     */
+    public static String SAVE_FILE_NAME = "save_data";
+
+    /**
      * Set the resolution of the screen.
      *
      * @param width  The width of the screen.

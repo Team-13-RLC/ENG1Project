@@ -12,7 +12,7 @@ public class Prefs {
     /**
      * The instance of Preferences used to save all data
      */
-    private static final Preferences prefs = Gdx.app.getPreferences("save_data");
+    private static final Preferences prefs = Gdx.app.getPreferences(Settings.SAVE_FILE_NAME);
 
     /**
      * Json object used for serialization
@@ -158,5 +158,9 @@ public class Prefs {
         public SaveDoesNotExist(String errorMessage) {
             super(errorMessage);
         }
+    }
+
+    public static Preferences getPrefs() {
+        return prefs;
     }
 }
