@@ -263,4 +263,16 @@ public class Race {
         }
         Prefs.Save.putFloat("timer", timer);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Race) {
+            Race r = (Race) obj;
+            return this.length == r.length &&
+                    this.computerBoats.equals(r.computerBoats) &&
+                    this.player.equals(r.player) &&
+                    this.timer == r.timer;
+        }
+        return false;
+    }
 }

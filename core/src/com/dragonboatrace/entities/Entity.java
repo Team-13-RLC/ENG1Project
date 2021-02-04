@@ -105,4 +105,17 @@ public abstract class Entity {
          Prefs.Save.putVector2("position" + name, position );
          Prefs.Save.putVector2("velocity" + name, velocity );
     }
+
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if(obj instanceof Entity){
+            Entity e = (Entity) obj;
+            return this.position.equals(e.position) &&
+                    this.velocity.equals(e.velocity) &&
+                    this.type.equals(e.type);
+        }
+        return false;
+    }
 }
