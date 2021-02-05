@@ -61,7 +61,7 @@ public class DifficultySelectScreen implements Screen {
         this.boatType = boatType;
 
         for (int i = 0; i < buttons.length; i++) {
-            buttons[i] = ButtonFactory.select(textureNames[i] + "_button");
+            buttons[i] = ButtonFactory.select(textureNames[i]);
             iconTextures[i] = new Texture(textureNames[i] + ".png");
         }
 

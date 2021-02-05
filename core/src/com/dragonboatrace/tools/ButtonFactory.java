@@ -12,6 +12,9 @@ import com.dragonboatrace.entities.EntityType;
  */
 public class ButtonFactory {
 
+    private final static String activeSuffix = "_button_active.png";
+    private final static String inactiveSuffix = "_button_inactive.png";
+
     /**
      * Static variable used to keep track of how many times the pause method is called
      */
@@ -35,8 +38,8 @@ public class ButtonFactory {
                         (Gdx.graphics.getWidth() - EntityType.BUTTON.getWidth()) / 2.0f,
                         (yOffset + spacing * ((pauseButtonCount++)%3)) / Settings.SCALAR
                 ),
-                texturePrefix + "_active.png",
-                texturePrefix + "_inactive.png"
+                texturePrefix + activeSuffix,
+                texturePrefix + inactiveSuffix
         );
     }
 
@@ -48,8 +51,8 @@ public class ButtonFactory {
     public static Button help(String texturePrefix) {
         return new Button(
                 new Vector2(0, 0),
-                texturePrefix + "_active.png",
-                texturePrefix + "_inactive.png"
+                texturePrefix + activeSuffix,
+                texturePrefix + inactiveSuffix
         );
     }
 
@@ -71,8 +74,8 @@ public class ButtonFactory {
         float spacing = (EntityType.BUTTON.getWidth() + xOffset);
         return new Button(
                 new Vector2(xOffset + spacing * ((boatSelectionButtonCount++)%4), 100),
-                texturePrefix + "_active.png",
-                texturePrefix + "_inactive.png"
+                texturePrefix + activeSuffix,
+                texturePrefix + inactiveSuffix
         );
     }
 
@@ -99,8 +102,8 @@ public class ButtonFactory {
                         (Gdx.graphics.getWidth() - EntityType.BUTTON.getWidth()) / 2.0f,
                         (yOffset + spacing * ((mainMenuButtonCount++)%4)) / Settings.SCALAR
                 ),
-                texturePrefix + "_active.png",
-                texturePrefix + "_inactive.png"
+                texturePrefix + activeSuffix,
+                texturePrefix + inactiveSuffix
         );
     }
 }
