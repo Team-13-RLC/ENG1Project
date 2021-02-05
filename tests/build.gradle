@@ -1,4 +1,5 @@
-
+sourceSets.main.resources.srcDirs = ["../core/assets"]
+project.ext.assetsDir = new File("../core/assets")
 
 apply plugin: "java"
 

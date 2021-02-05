@@ -298,7 +298,7 @@ public class Boat extends Entity {
      * @return True if a collision occurred, False if no collision.
      */
     protected boolean checkCollisions() {
-        for (Collidable collidable :lane.getCollidables()) {
+        for (Collidable collidable : lane.getCollidables()) {
             if (collidable.getHitBox().collidesWith(this.hitbox)) {
                 collidable.dispose();
                 lane.getCollidables().remove(collidable);
@@ -437,6 +437,7 @@ public class Boat extends Entity {
 
     /**
      * Set the boat time
+     *
      * @param nowTime The time passed since last call.
      */
     public void setTime(float nowTime) {
@@ -454,6 +455,7 @@ public class Boat extends Entity {
 
     /**
      * Set the total boat time.
+     *
      * @param nowTime The time passed since last call.
      */
     public void setTotalTime(float nowTime) {
@@ -490,7 +492,7 @@ public class Boat extends Entity {
         super.dispose();
     }
 
-    public void restore(){
+    public void restore() {
         super.restore(name);
         boatType = Prefs.Restore.getBoatType("boatType" + name);
 
@@ -505,13 +507,30 @@ public class Boat extends Entity {
         penaltyTime = Prefs.Restore.getFloat("penaltyTime" + name);
     }
 
-    public void save(){
+    public void save() {
         super.save(name);
-        Prefs.Save.putBoatType("boatType" + name, boatType );
-        Prefs.Save.putFloat("health" + name, health );
-        Prefs.Save.putFloat("stamina" + name, stamina );
-        Prefs.Save.putFloat("time" + name, time );
-        Prefs.Save.putFloat("totalTime" + name, totalTime );
-        Prefs.Save.putFloat("penaltyTime" + name, penaltyTime );
+        Prefs.Save.putBoatType("boatType" + name, boatType);
+        Prefs.Save.putFloat("health" + name, health);
+        Prefs.Save.putFloat("stamina" + name, stamina);
+        Prefs.Save.putFloat("time" + name, time);
+        Prefs.Save.putFloat("totalTime" + name, totalTime);
+        Prefs.Save.putFloat("penaltyTime" + name, penaltyTime);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (obj instanceof Boat) {
+            Boat e = (Boat) obj;
+            return super.equals(e) &&
+                    this.boatType.equals(e.boatType) &&
+                    this.health == (e.health) &&
+                    this.stamina == e.stamina &&
+                    this.time == e.time &&
+                    this.totalTime == e.totalTime &&
+                    this.penaltyTime == e.penaltyTime;
+        }
+        return false;
     }
 }

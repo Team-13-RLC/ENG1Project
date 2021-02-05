@@ -19,6 +19,7 @@ package dragonboatrace.tests;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.dragonboatrace.tools.Settings;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
@@ -42,6 +43,8 @@ public class GdxTestRunner extends BlockJUnit4ClassRunner implements Application
 
 		new HeadlessApplication(this, conf);
 		Gdx.gl = mock(GL20.class);
+		Gdx.gl20 = mock(GL20.class);
+		Gdx.graphics = new MockGraphics();
 	}
 
 	@Override
