@@ -69,7 +69,7 @@ public class MainMenuScreen implements Screen {
         };
 
         for (int i = 0; i < buttons.length; i++) {
-            buttons[i] = ButtonFactory.mainMenu(textureNames[i] + "_button");
+            buttons[i] = ButtonFactory.mainMenu(textureNames[i]);
         }
 
         this.logo = new Texture("dragon.png");

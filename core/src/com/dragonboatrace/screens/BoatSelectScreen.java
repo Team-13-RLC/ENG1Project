@@ -64,7 +64,7 @@ public class BoatSelectScreen implements Screen {
         this.game = game;
 
         for (int i = 0; i < buttons.length; i++) {
-            buttons[i] = ButtonFactory.select(textureNames[i] + "_button");
+            buttons[i] = ButtonFactory.select(textureNames[i]);
             iconTextures[i] = new Texture(textureNames[i] + ".png");
         }
 

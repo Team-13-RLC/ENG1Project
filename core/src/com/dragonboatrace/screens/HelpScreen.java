@@ -83,7 +83,7 @@ public class HelpScreen implements Screen {
     public HelpScreen(MainMenuScreen callBack) {
         this.mainMenu = callBack;
         this.helpInfo = new Texture(Gdx.files.local("help_screen_info.png"));
-        this.backButton = ButtonFactory.help("back_button");
+        this.backButton = ButtonFactory.help("back");
         this.maxHeight = Gdx.graphics.getHeight() - this.helpInfo.getHeight() / Settings.SCALAR;
 
         this.currPos = maxHeight;
