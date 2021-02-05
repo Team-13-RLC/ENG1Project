@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
  * Testing The save() and restore methods of Race.
  */
 @RunWith(GdxTestRunner.class)
-public class saveTest {
+public class SaveTetst {
     /**
      * Backup of the old save fale.
      */

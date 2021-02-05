@@ -133,6 +133,17 @@ public class PrefsTest {
     }
 
     /**
+     * Testing if the open() method opens a save file with the "save_exists" field set
+     * @throws Prefs.SaveDoesNotExist if the field is not set.
+     */
+    @Test
+    public void openNoThrowTest() throws Prefs.SaveDoesNotExist {
+        key = "save_exists";
+        Prefs.getPrefs().putInteger(key, 1);
+        Prefs.Restore.open();
+    }
+
+    /**
      * Testing whether closing a file creates a special field signifying that the save is valid.
      */
     @Test()
@@ -141,18 +152,6 @@ public class PrefsTest {
         key = "save_exists";
         assertEquals(1, Prefs.Restore.getInteger(key));
     }
-
-    /**
-     * Testing if the open() method opens a save file with the "save_exists" field set
-     * @throws Prefs.SaveDoesNotExist if the field is not set.
-     */
-    @Test
-    public void closeNoThrowTest() throws Prefs.SaveDoesNotExist {
-        key = "save_exists";
-        Prefs.getPrefs().putInteger(key, 1);
-        Prefs.Restore.open();
-    }
-
 
     /**
      * Cleanup after the each test. Remove the key which got written to the save file.
