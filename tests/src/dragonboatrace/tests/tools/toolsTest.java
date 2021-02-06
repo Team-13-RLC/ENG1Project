@@ -5,7 +5,6 @@ import com.dragonboatrace.tools.Lane;
 import dragonboatrace.tests.GdxTestRunner;
 import org.junit.*;
 import static org.junit.Assert.*;
-import jdk.internal.jline.internal.TestAccessible;
 import org.junit.runner.RunWith;
 
 @RunWith(GdxTestRunner.class)
