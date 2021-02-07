@@ -39,6 +39,7 @@ public class difficultyTest {
         ArrayList<Collidable> colList1 = race1.getPlayer().getLane().getCollidables();
         int size1 = colList1.size();
 
+
         for (int i = 0; i < 100; i++) {
             race2.update(0.16f, game);
         }
@@ -51,14 +52,19 @@ public class difficultyTest {
         ArrayList<Collidable> colList3 = race3.getPlayer().getLane().getCollidables();
         int size3 = colList3.size();
 
-        assertTrue(size1 == size2);
+        System.out.println(size1);
+        System.out.println(size2);
+        System.out.println(size3);
+
+        assertTrue(size1 <= size2 && size2 <= size3 );
 
     }
 
+    /*
     @Test
     public void powerupDecrease() {
 
-    }
+    }*/
 
 
 }
