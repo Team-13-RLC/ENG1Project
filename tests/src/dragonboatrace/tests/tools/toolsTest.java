@@ -1,10 +1,13 @@
 package dragonboatrace.tests.tools;
+
 import com.badlogic.gdx.math.Vector2;
 import com.dragonboatrace.tools.Hitbox;
 import com.dragonboatrace.tools.Lane;
 import dragonboatrace.tests.GdxTestRunner;
 import org.junit.*;
+
 import static org.junit.Assert.*;
+
 import org.junit.runner.RunWith;
 
 @RunWith(GdxTestRunner.class)
@@ -32,12 +35,8 @@ public class toolsTest {
     }
 
     @Test
-    public void playerPenaltyTest() {
-
-    }
-
-    @Test
-    public void gameLengthTest() {
+    public void playerPenaltyTest()
+    {
 
     }
 
@@ -46,14 +45,13 @@ public class toolsTest {
 
     }
 
-    public void finalRaceTest(){
+    public void finalRaceTest() {
 
     }
 
-    public void qualifierRaceTest(){
+    public void qualifierRaceTest() {
 
     }
-
 
 
 }

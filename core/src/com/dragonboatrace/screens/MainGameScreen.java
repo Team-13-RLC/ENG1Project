@@ -229,4 +229,8 @@ public class MainGameScreen implements Screen {
         private static final byte PAUSED = 1;
         private static final byte COUNTDOWN = 2;
     }
+
+    public Race getRace(){
+        return this.race;
+    }
 }
