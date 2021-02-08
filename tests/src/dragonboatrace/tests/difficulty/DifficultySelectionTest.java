@@ -40,7 +40,7 @@ public class DifficultySelectionTest {
      * Testing if setting difficulty to EASY applies appropriate settings.
      */
     @Test
-    public void selectEasy() {
+    public void testSelectEasy() {
         Difficulty.EASY.set();
         assertEquals(Settings.OBSTACLE_SPAWN_CHANCE, 0.2, 0.0001);
         assertEquals(Settings.OBSTACLE_DAMAGE_MULTIPLIER, 0.5, 0.0001);
@@ -54,7 +54,7 @@ public class DifficultySelectionTest {
      * Testing if setting difficulty to MEDIUM applies appropriate settings.
      */
     @Test
-    public void selectMedium() {
+    public void testSelectMedium() {
         Difficulty.MEDIUM.set();
         assertEquals(Settings.OBSTACLE_SPAWN_CHANCE, 0.5, 0.0001);
         assertEquals(Settings.OBSTACLE_DAMAGE_MULTIPLIER, 1, 0.0001);
@@ -68,7 +68,7 @@ public class DifficultySelectionTest {
      * Testing if setting difficulty to HARD applies appropriate settings.
      */
     @Test
-    public void selectHard() {
+    public void testSelectHard() {
         Difficulty.HARD.set();
         assertEquals(Settings.OBSTACLE_SPAWN_CHANCE, 0.8, 0.0001);
         assertEquals(Settings.OBSTACLE_DAMAGE_MULTIPLIER, 2, 0.0001);
@@ -82,7 +82,7 @@ public class DifficultySelectionTest {
      * Testing if setting difficulty to VERYHARD applies appropriate settings.
      */
     @Test
-    public void selectVeryHard() {
+    public void testSelectVeryHard() {
         Difficulty.VERYHARD.set();
         assertEquals(Settings.OBSTACLE_SPAWN_CHANCE, 1, 0.0001);
         assertEquals(Settings.OBSTACLE_DAMAGE_MULTIPLIER, 100, 0.0001);
