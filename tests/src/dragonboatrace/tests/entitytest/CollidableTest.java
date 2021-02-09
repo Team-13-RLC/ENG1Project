@@ -206,7 +206,7 @@ public class CollidableTest {
      * Tests to see if the Heal powerup applies it's effect correctly.
      */
     @Test
-    public void testHeal(){
+    public void testHealEffect(){
         test_boat.addHealth(-50);
         collidableArrayList.get(7).takeEffect(test_boat);
         assertTrue(test_boat.getHealth() == 75);
