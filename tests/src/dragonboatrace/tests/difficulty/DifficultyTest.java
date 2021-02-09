@@ -17,13 +17,13 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 @RunWith(GdxTestRunner.class)
-public class difficultyTest {
+public class DifficultyTest {
 
     DragonBoatRace game;
     Race race1, race2, race3;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         game = mock(DragonBoatRace.class);
         game.create();
         race1 = new Race(10000, BoatType.AGILE, 1);
@@ -52,19 +52,8 @@ public class difficultyTest {
         ArrayList<Collidable> colList3 = race3.getPlayer().getLane().getCollidables();
         int size3 = colList3.size();
 
-        System.out.println(size1);
-        System.out.println(size2);
-        System.out.println(size3);
 
         assertTrue(size1 <= size2 && size2 <= size3 );
 
     }
-
-    /*
-    @Test
-    public void powerupDecrease() {
-
-    }*/
-
-
 }
