@@ -28,11 +28,12 @@ public class toolsTest {
     // TO DO
     @Test
     public void boundaryDetectionTest() {
-        assertEquals(false, laneTest.getHitbox().leaves(boxB));
+        assertFalse(boxB.leaves(laneTest.getHitbox()));
         // moving the hitbox A outside of the lane's area.
-        boxB.move(-2, 0);
-        assertEquals(true, laneTest.getHitbox().leaves(boxB));
+        boxB.move(-1, -1);
+        assertTrue(boxB.leaves(laneTest.getHitbox()));
     }
+
 
     @Test
     public void playerPenaltyTest()
