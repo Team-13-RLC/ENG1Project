@@ -98,6 +98,10 @@ public class Lane {
         return this.collidables;
     }
 
+    public ArrayList<Float> getRandomWaitTimes() {
+        return randomWaitTimes;
+    }
+
     /**
      * Get the lanes hit box
      *
