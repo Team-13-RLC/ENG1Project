@@ -2,7 +2,7 @@ package dragonboatrace.tests.difficulty;
 
 import org.junit.Test;
 
-public class difficultyTest
+public class DifficultyTest
 {
 
     @Test
