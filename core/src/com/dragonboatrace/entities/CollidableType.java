@@ -61,7 +61,7 @@ public enum CollidableType {
      * Reduce the amount of recorded time for the current round. No timeout.
      */
     LESSTIME("lesstime.png", 0, boat -> {
-        boat.setTime(boat.getTime() - LESSTIME_BY);
+        boat.setTime(- LESSTIME_BY);
     }),
 
     /**

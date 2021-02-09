@@ -3,6 +3,7 @@ package com.dragonboatrace.entities;
 import com.badlogic.gdx.math.Vector2;
 import com.dragonboatrace.entities.boats.Boat;
 import com.dragonboatrace.tools.CollidableEffect;
+import com.dragonboatrace.tools.CollidableStats;
 import com.dragonboatrace.tools.VectorFactory;
 
 /**
@@ -75,16 +76,7 @@ public class Collidable extends Entity {
      * Is the object a powerup or an obstacle
      */
     public boolean isPowerup() {
-        switch (type) {
-            case INVULN:
-            case SPEEDUP:
-            case LESSDAMAGE:
-            case LESSTIME:
-            case HEAL:
-                return true;
-            default:
-                return false;
-        }
+        return type.ordinal() >= CollidableStats.POWERUPS_START_AT_INDEX;
     }
 
     /**
