@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
 @RunWith(GdxTestRunner.class)
 public class toolsTest {
 
-    Hitbox boxA = new Hitbox(0, 0, 5, 1);
+    Hitbox boxA = new Hitbox(1, 0, 5, 1);
     Hitbox boxB = new Hitbox(5, 0, 5, 1);
     Vector2 laneVector = new Vector2(0, 0);
     Lane laneTest = new Lane(laneVector, 10, 1);
@@ -21,7 +21,7 @@ public class toolsTest {
     // testing for the functional requirement: collision detection.
     @Test
     public void collisionDetectionTest() {
-        assertEquals(true, boxA.collidesWith(boxB));
+        assertTrue(boxA.collidesWith(boxB));
     }
 
     // testing for the functional requirement: boundary detection.
