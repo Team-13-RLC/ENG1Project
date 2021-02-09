@@ -445,6 +445,14 @@ public class Boat extends Entity {
     }
 
     /**
+     * Set the boat time to the newtime value.
+     *
+     * Created to aid testing.
+     * @param newtime the new time value.
+     */
+    public void setTestTime(float newtime){this.time = newtime;}
+
+    /**
      * Get the total boat time
      *
      * @return A float of total boat time
