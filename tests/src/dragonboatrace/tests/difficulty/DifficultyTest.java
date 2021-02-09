@@ -1,7 +1,6 @@
 package dragonboatrace.tests.difficulty;
 
 import com.dragonboatrace.DragonBoatRace;
-import com.dragonboatrace.entities.Collidable;
 import com.dragonboatrace.entities.boats.BoatType;
 
 import com.dragonboatrace.tools.Race;
@@ -33,27 +32,23 @@ public class DifficultyTest {
 
     @Test
     public void obstacleIncrease() {
-        for (int i = 0; i < 100; i++) {
-            race1.update(0.16f, game);
-        }
-        ArrayList<Collidable> colList1 = race1.getPlayer().getLane().getCollidables();
+        race1.update(0.16f, game);
+        ArrayList<?> colList1 = race1.getPlayer().getLane().getRandomWaitTimes();
         int size1 = colList1.size();
 
 
-        for (int i = 0; i < 100; i++) {
-            race2.update(0.16f, game);
-        }
-        ArrayList<Collidable> colList2 = race2.getPlayer().getLane().getCollidables();
+        race2.update(0.16f, game);
+        ArrayList<?> colList2 = race2.getPlayer().getLane().getRandomWaitTimes();
         int size2 = colList2.size();
 
-        for (int i = 0; i < 100; i++) {
-            race3.update(0.16f, game);
-        }
-        ArrayList<Collidable> colList3 = race3.getPlayer().getLane().getCollidables();
+        race3.update(0.16f, game);
+        ArrayList<?> colList3 = race3.getPlayer().getLane().getRandomWaitTimes();
         int size3 = colList3.size();
 
 
-        assertTrue(size1 <= size2 && size2 <= size3 );
+        System.out.println(size1 + " " + size2 + " " + size3);
+
+        assertTrue(size1 <= size2 && size2 <= size3);
 
     }
 }
