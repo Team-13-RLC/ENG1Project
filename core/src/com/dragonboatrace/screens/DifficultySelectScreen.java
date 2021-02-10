@@ -54,7 +54,8 @@ public class DifficultySelectScreen implements Screen {
     /**
      * Creates a new screen to display the difficulty options to the player.
      *
-     * @param game The instance of the {@link DragonBoatRace} game.
+     * @param game     The instance of the {@link DragonBoatRace} game.
+     * @param boatType The boat type selected on the previous screen which is to be passed to the MainGameScreen
      */
     public DifficultySelectScreen(DragonBoatRace game, BoatType boatType) {
         this.game = game;

@@ -67,6 +67,8 @@ public class Collidable extends Entity {
 
     /**
      * Invoke the effect of the collidable on the boat.
+     *
+     * @param boat Which boat is affected
      */
     public void takeEffect(Boat boat) {
         effect.invoke(boat);
@@ -74,6 +76,7 @@ public class Collidable extends Entity {
 
     /**
      * Is the object a powerup or an obstacle
+     * @return true for powerup, false otherwise
      */
     public boolean isPowerup() {
         return type.ordinal() >= CollidableStats.POWERUPS_START_AT_INDEX;
